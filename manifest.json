@@ -1,0 +1,13 @@
+{
+    "short_name": "Bolo Calculaste?",
+    "name": "Bolo Calculaste?",
+    "icons": [
+        {
+            "src": "assets/icon_iphone.png",
+            "type": "image.png"
+        }
+    ],
+    "starr_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait"
+}
