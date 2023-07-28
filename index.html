@@ -177,7 +177,11 @@
 
               <!--  display valores sica -->
 
-              <div class="modulo" id="valoresSicaPubli" style="display: none">
+              <div
+                class="modulo row"
+                id="valoresSicaPubli"
+                style="display: none"
+              >
                 <i
                   class="material-icons right"
                   onclick="cerrarModuloValoresPubli()"
@@ -207,6 +211,12 @@
                     </tr>
                   </tbody>
                 </table>
+                <!-- <div class="col">
+                  <button class="btn" id="btnValorPubli">Junio 2023</button>
+                </div>
+                <div class="col right">
+                  <button class="btn">Agosto 2023</button>
+                </div> -->
               </div>
 
               <!-- input cantidades -->
@@ -386,6 +396,14 @@
                   <td>VAC</td>
                   <td id="unidVACPubli"></td>
                   <td id="impVACPubli" class="green-text text-darken-1"></td>
+                </tr>
+                <tr>
+                  <td>SAC sobre VAC</td>
+                  <td id="unidSACSVACPubli"></td>
+                  <td
+                    id="impSACSVACPubli"
+                    class="green-text text-darken-1"
+                  ></td>
                 </tr>
                 <tr>
                   <td>Descuentos*</td>

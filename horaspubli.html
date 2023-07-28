@@ -60,9 +60,7 @@
               class="sidenav-trigger show-on-large"
               ><i class="material-icons">menu</i></a
             >
-            <a href="#" class="brand-logo" id="currentScreen"
-              >BoloCalculaste?</a
-            >
+            <a href="#" class="brand-logo" id="currentScreen">Calculo Horas</a>
             <div>
               <i
                 class="material-icons right modal-trigger"
@@ -196,21 +194,43 @@
               </ul>
             </div>
           </div>
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red darken-2">
+              <i class="large material-icons">more_vert</i>
+            </a>
+            <ul>
+              <li>
+                <a
+                  class="btn-floating green tooltipped"
+                  data-position="left"
+                  data-tooltip="Agregar Dia"
+                  id="addBtn"
+                  ><i class="material-icons">add</i></a
+                >
+              </li>
+              <li>
+                <a
+                  class="btn-floating yellow darken-1 tooltipped"
+                  data-position="left"
+                  data-tooltip="Calcular Cierre"
+                  id="botonCierre"
+                  ><i class="material-icons">calculate</i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </main>
-    <footer class="page-footer white">
-      <button
-        class="btn right btn-cierre"
-        id="botonCierre"
-        style="display: none"
-      >
-        Calcular Cierre
-      </button>
-    </footer>
 
     <script src="js/horasPubli.js"></script>
+    <script src="js/navegacionHoras.js"></script>
+    <script src="js/inicializar.js"></script>
+    <script src="js/publiJun2023fix.js"></script>
+    <script src="js/about.js"></script>
+    <script src="js/largoJun2023.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script>
       $(document).ready(function () {
         $(".modal").modal();
@@ -235,6 +255,9 @@
       });
       $(document).ready(function () {
         $(".fixed-action-btn").floatingActionButton();
+      });
+      $(document).ready(function () {
+        $(".tooltipped").tooltip();
       });
     </script>
     <script>

@@ -1,32 +1,33 @@
 //script Modulo Publi
 
-//declaracion variables
+//declaracion Variables
 
-var valor8Publi;
-var valor12Publi;
-var valorExtPubli;
-var valorExt200Publi;
-var valorExt300Publi;
-var sacPubli;
-var vacPubli;
-var subTotalPubli; // bruto mas sac
-var totalBrutoPubli;
-var totalNetoPubli;
-var valoresActualesSica;
-var valor8hsOtre;
-var valor12hsOtre;
-var valorXtraOtre;
-var valorXtraOtre200;
-var valorXtraOtre300;
-var otreSelectedTrue = false;
-var listaValores8Publi = [
+let valor8Publi;
+let valor12Publi;
+let valorExtPubli;
+let valorExt200Publi;
+let valorExt300Publi;
+let sacPubli;
+let vacPubli;
+let sacSvacPubli;
+let subTotalPubli; // bruto mas sac
+let totalBrutoPubli;
+let totalNetoPubli;
+let valoresActualesSica;
+let valor8hsOtre;
+let valor12hsOtre;
+let valorXtraOtre;
+let valorXtraOtre200;
+let valorXtraOtre300;
+let otreSelectedTrue = false;
+let listaValores8Publi = [
   0, 31282, 26066, 18223, 12188, 31282, 18223, 12188, 12120, 23462, 18223,
   12188, 135562, 55275, 36494, 26066, 23231, 46922, 26066, 40551, 36494, 28143,
   20862, 36494, 28143, 36494, 28143, 36494, 28143, 36494, 20862, 55275, 25023,
   36494, 34529, 23619, 18223, 12188, 29431, 18223, 12188, 59434, 31282, 21899,
   5467,
 ];
-var listaValores12Publi = [
+let listaValores12Publi = [
   0, 54744, 45615, 31890, 21329, 54744, 31890, 21329, 21210, 41059, 31890,
   21329, 237234, 96731, 63864, 45615, 40654, 82114, 45615, 70965, 63864, 49251,
   36508, 63864, 49251, 63864, 49251, 63864, 49251, 63864, 36508, 96731, 43790,
@@ -34,7 +35,7 @@ var listaValores12Publi = [
   9567,
 ];
 
-var rolesListPubli = [
+let rolesListPubli = [
   "Asistente De Dirección",
   "Continuista (Script)",
   "1º Ayudante De Dirección",
@@ -86,11 +87,11 @@ document.getElementById("cantExtra200Publi").disabled = true;
 document.getElementById("cantExtra300Publi").disabled = true;
 
 function llenarRolesPubli() {
-  var llenarLista = document.getElementById("rolesPubli");
+  let llenarLista = document.getElementById("rolesPubli");
 
-  for (var i = 0; i < rolesListPubli.length; i++) {
-    var opt = rolesListPubli[i];
-    var el = document.createElement("option");
+  for (let i = 0; i < rolesListPubli.length; i++) {
+    let opt = rolesListPubli[i];
+    let el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
     llenarLista.appendChild(el);
@@ -230,18 +231,19 @@ function calculoPubli() {
   // calculo de sac y vac
   sacPubli = totalBrutoPubli * 0.0833;
   vacPubli = (totalBrutoPubli + sacPubli) * 0.05;
+  sacSvacPubli = vacPubli * 0.0833;
   //subtotal
   subTotalPubli = totalBrutoPubli + sacPubli;
   //inicia funcion define descuento a aplicar
   afiliadoPubli();
   /* total neto */
-  totalNetoPubli =
-    subTotalPubli - descAplicarPubli + vacPubli + vacPubli * 0.0833;
+  totalNetoPubli = subTotalPubli - descAplicarPubli + vacPubli + sacSvacPubli;
   // 2 decimales a los totales
   totalButoPubli = totalBrutoPubli.toFixed(2);
   totalNetoPubli = totalNetoPubli.toFixed(2);
   sacPubli = sacPubli.toFixed(2);
   vacPubli = vacPubli.toFixed(2);
+  sacSvacPubli = sacSvacPubli.toFixed(2);
   descAplicarPubli = descAplicarPubli.toFixed(2);
   console.log(totalBrutoPubli);
   console.log(descAplicarPubli);
@@ -263,7 +265,7 @@ function calculoPubli() {
 //definir que descuento aplica
 function afiliadoPubli() {
   if (document.getElementById("afiliadoPubli").checked == true) {
-    //variable global descAplicar
+    //letiable global descAplicar
     descAplicarPubli = subTotalPubli * 0.2;
     percentPubliPrint = "20%";
   } else {
@@ -314,6 +316,9 @@ function printTableTotalPubli() {
   //vac
   document.getElementById("unidVACPubli").innerHTML = "5%";
   document.getElementById("impVACPubli").innerHTML = "$ " + vacPubli;
+  //Sac Sobre vac
+  document.getElementById("unidSACSVACPubli").innerHTML = "8,33%";
+  document.getElementById("impSACSVACPubli").innerHTML = "$ " + sacSvacPubli;
   //desc
   document.getElementById("unidDescPubli").innerHTML = percentPubliPrint;
   document.getElementById("impDescPubli").innerHTML = "-$ " + descAplicarPubli;
