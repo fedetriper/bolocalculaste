@@ -91,17 +91,36 @@ function AgregarJor12(fechaIn, fechaOut, penalty, duracionPenalty) {
   const diffInHours = Math.abs(dateOut - dateIn) / 36e5;
   const regularHours = Math.max(12, diffInHours); // Consider jornadas de 12hs with minimum 12 hours
 
-  const penaltyHours = penalty ? duracionPenalty : 0.0;
-  const overtimeHours = Math.max(0, regularHours - 12 - penaltyHours);
+  let overtimeHours100 = 0; // Hours at 100% overtime rate
+  let overtimeHours200 = 0; // Hours at 200% overtime rate
+  let overtimeHours300 = 0; // Hours at 300% overtime rate
+
+  if (regularHours > 12) {
+    overtimeHours100 = Math.min(4, regularHours - 12);
+    if (regularHours > 16) {
+      overtimeHours200 = Math.min(2, regularHours - 16);
+      if (regularHours > 18) {
+        overtimeHours300 = regularHours - 18;
+      }
+    }
+  }
+
   const regularRate = 1.0; // Regular rate is 100%
-  const overtimeRate = regularRate + 1.0; // Overtime rate is regular rate + 100%
+  const overtimeRate100 = regularRate + 1.0; // Overtime rate is regular rate + 100%
+  const overtimeRate200 = regularRate + 2.0; // Overtime rate is regular rate + 200%
+  const overtimeRate300 = regularRate + 3.0; // Overtime rate is regular rate + 300%
 
-  const totalPay = regularHours * regularRate + overtimeHours * overtimeRate;
+  // Calculate penalty pay (if any)
+  const penaltyPay = penalty ? duracionPenalty : 0.0;
 
-  jornadaNumero++; // Increment the jornada counter
+  const totalPay =
+    regularHours * regularRate +
+    overtimeHours100 * overtimeRate100 +
+    overtimeHours200 * overtimeRate200 +
+    overtimeHours300 * overtimeRate300 +
+    penaltyPay;
 
-  // const penaltyCheckbox = document.getElementById("penaltyPubli");
-  // const penaltyDurationInput = document.getElementById("duracionPenaltyPubli");
+  jornadaNumero++; // incrementa el numero de jornada
 
   const jornada = {
     numero: jornadaNumero,
@@ -111,7 +130,10 @@ function AgregarJor12(fechaIn, fechaOut, penalty, duracionPenalty) {
     penalty: penalty,
     duracionPenalty: duracionPenalty,
     regularHours: regularHours,
-    overtimeHours: overtimeHours,
+    overtimeHours100: overtimeHours100,
+    overtimeHours200: overtimeHours200,
+    overtimeHours300: overtimeHours300,
+    penaltyPay: penaltyPay,
     totalPay: totalPay,
   };
 
@@ -120,6 +142,7 @@ function AgregarJor12(fechaIn, fechaOut, penalty, duracionPenalty) {
   console.log("Nueva jornada agregada: ", jornada);
   console.log("Todas las jornadas:", jornadasArray);
 }
+
 //funcion 8hs
 function AgregarJor8(fechaIn, fechaOut) {
   // const penaltyCheckbox = document.getElementById("penaltyPubli");
@@ -205,8 +228,8 @@ function CrearLista(jornada) {
       DeleteJornada(jornada.numero);
     });
   }
-  const botonCierre = document.getElementById("botonCierre");
-  botonCierre.style.display = jornadasArray.length > 0 ? "block" : "none";
+  const botonCierrePubli = document.getElementById("botonCierrePubli");
+  botonCierrePubli.style.display = jornadasArray.length > 0 ? "block" : "none";
 }
 //borrar jornada
 function DeleteJornada(jornadaNumeroToDelete) {
@@ -227,7 +250,7 @@ function UpdateJornadasList() {
 
   if (jornadasArray.length === 0) {
     // Hide the "Calcular Cierre" button if there are no jornadas
-    botonCierre.style.display = "none";
+    botonCierrePubli.style.display = "none";
   }
 
   // Re-create the list with the updated jornadasArray
@@ -241,45 +264,129 @@ function UpdateJornadasList() {
 function CalcularCierre() {
   let jornadas8hs = 0;
   let jornadas12hs = 0;
-  let horasExtras100 = 0;
-  let horasExtras200 = 0;
-  let horasExtras300 = 0;
-  let horasPenalty = 0;
+  let totalHorasExtras100 = 0;
+  let totalHorasExtras200 = 0;
+  let totalHorasExtras300 = 0;
+  let totalHorasPenalty = 0;
 
   jornadasArray.forEach((jornada) => {
     if (jornada.tipo === "8hs") {
       jornadas8hs++;
     } else if (jornada.tipo === "12hs") {
       jornadas12hs++;
-    }
+      const regularHours = jornada.regularHours;
+      const penaltyHours = jornada.penalty
+        ? parseFloat(jornada.duracionPenalty)
+        : 0.0;
+      const overtimeHours = regularHours - 12 - penaltyHours;
 
-    if (jornada.tipo === "12hs") {
-      horasExtras100 += Math.max(0, jornada.regularHours - 12);
-      horasExtras200 += Math.max(0, jornada.regularHours - 16);
-      horasExtras300 += Math.max(0, jornada.regularHours - 18);
+      if (overtimeHours > 0) {
+        if (overtimeHours <= 4) {
+          totalHorasExtras100 += overtimeHours;
+        } else if (overtimeHours <= 6) {
+          totalHorasExtras100 += 4;
+          totalHorasExtras200 += overtimeHours - 4;
+        } else {
+          totalHorasExtras100 += 4;
+          totalHorasExtras200 += 2;
+          totalHorasExtras300 += overtimeHours - 6;
+        }
+      }
     }
 
     if (jornada.penalty) {
-      horasPenalty += parseFloat(jornada.duracionPenalty);
+      totalHorasPenalty += parseFloat(jornada.duracionPenalty);
     }
   });
 
   const resultadoCierre = {
     jornadas8hs: jornadas8hs,
     jornadas12hs: jornadas12hs,
-    horasExtras100: horasExtras100,
-    horasExtras200: horasExtras200,
-    horasExtras300: horasExtras300,
-    horasPenalty: horasPenalty,
+    totalHorasExtras100: totalHorasExtras100,
+    totalHorasExtras200: totalHorasExtras200,
+    totalHorasExtras300: totalHorasExtras300,
+    totalHorasPenalty: totalHorasPenalty,
   };
-
+  MostrarCierrePubli(resultadoCierre);
+  btnVolver();
   console.log("Resultado del cierre:", resultadoCierre);
-  // You can now use the resultadoCierre object as needed (e.g., display it on the UI, etc.)
 }
 
-// ... (previous code unchanged)
-
 // Add event listener for "Calcular Cierre" button
-botonCierre.addEventListener("click", () => {
+botonCierrePubli.addEventListener("click", () => {
   CalcularCierre();
 });
+
+//mostar cierre
+function MostrarCierrePubli(resultadoCierre) {
+  //muestra resultado
+  const modCierrePubli = document.getElementById("modCierrePubli");
+  modCierrePubli.style.display = "block";
+  //oculta input
+  const inputUsuarioHorasPubli = document.getElementById(
+    "inputUsuarioHorasPubli"
+  );
+  inputUsuarioHorasPubli.style.display = "none";
+  //oculta jornadas
+  const moduloDiasPubli = document.getElementById("moduloDiasPubli");
+  moduloDiasPubli.style.display = "none";
+
+  const ul = document.getElementById("resultadocierrePubli");
+  ul.innerHTML = ""; // Clear any existing list items
+
+  const li1 = document.createElement("li");
+  li1.textContent = `Jornadas de 8hs: ${resultadoCierre.jornadas8hs}`;
+  ul.appendChild(li1);
+
+  const li2 = document.createElement("li");
+  li2.textContent = `Jornadas de 12hs: ${resultadoCierre.jornadas12hs}`;
+  ul.appendChild(li2);
+
+  const li3 = document.createElement("li");
+  li3.textContent = `Horas Extras al 100%: ${resultadoCierre.totalHorasExtras100}`;
+  ul.appendChild(li3);
+
+  const li4 = document.createElement("li");
+  li4.textContent = `Horas Extras al 200%: ${resultadoCierre.totalHorasExtras200}`;
+  ul.appendChild(li4);
+
+  const li5 = document.createElement("li");
+  li5.textContent = `Horas Extras al 300%: ${resultadoCierre.totalHorasExtras300}`;
+  ul.appendChild(li5);
+
+  const li6 = document.createElement("li");
+  li6.textContent = `Horas Penalty: ${resultadoCierre.totalHorasPenalty}`;
+  ul.appendChild(li6);
+}
+function btnVolver() {
+  const btnVolver = document.getElementById("btnVolver");
+  btnVolver.addEventListener("click", () => {
+    // Hide the modCierrePubli div
+    const modCierrePubli = document.getElementById("modCierrePubli");
+    modCierrePubli.style.display = "none";
+
+    // Show the inputUsuarioHorasPubli div
+    const inputUsuarioHorasPubli = document.getElementById(
+      "inputUsuarioHorasPubli"
+    );
+    inputUsuarioHorasPubli.style.display = "block";
+
+    // Reset the form values
+    const fechaInControl = document.getElementById("fechaInPubli");
+    const fechaOutControl = document.getElementById("fechaOutPubli");
+    const penaltyCheckbox = document.getElementById("penaltyPubli");
+    const duracionPenaltyInput = document.getElementById(
+      "duracionPenaltyPubli"
+    );
+
+    fechaInControl.value = "";
+    fechaOutControl.value = "";
+    penaltyCheckbox.checked = false;
+    duracionPenaltyInput.value = "00:00";
+    duracionPenaltyInput.style.display = "none";
+
+    // Clear the jornadasArray and update the jornadas list
+    jornadasArray.length = 0;
+    UpdateJornadasList();
+  });
+}

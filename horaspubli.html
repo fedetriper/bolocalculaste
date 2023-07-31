@@ -26,7 +26,7 @@
       sizes="120x120"
     />
     <!-- Estilos -->
-    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="css/estilos_v2.css" />
     <!-- Compiled and minified CSS -->
     <link
       rel="stylesheet"
@@ -108,81 +108,96 @@
       <div class="center container">
         <div class="section" id="seccionHorasPubli">
           <div class="row modulo" id="inputUsuarioHorasPubli">
-            <form class="s12" id="formIngresoHorasPubli">
+            <form class="col s12" id="formIngresoHorasPubli">
               <!-- input datos de la jornada -->
               <div class="row" id="inputJorHorariosPubli">
-                <div class="row input-field">
-                  <div class="switch col s12" id="selectorTipoJornadaPubli">
-                    <label class="mb10">
-                      Jornada de 8hs
-                      <input type="checkbox" id="swTipoJornada" />
-                      <span class="lever"></span>
-                      Jornada de 12hs
-                    </label>
-                    <div class="divider mt10"></div>
+                <div class="col s12" id="ingresarDatosPubli">
+                  <div class="row input-field">
+                    <div class="switch col s12" id="selectorTipoJornadaPubli">
+                      <label class="mb10">
+                        Jornada de 8hs
+                        <input type="checkbox" id="swTipoJornada" />
+                        <span class="lever"></span>
+                        Jornada de 12hs
+                      </label>
+                      <div class="divider mt10"></div>
+                    </div>
+                  </div>
+
+                  <!-- Inicio Jornada -->
+
+                  <div class="col s12 l6">
+                    <label class="left" for="fechaInPubli">Fecha Inicio</label>
+                    <input
+                      type="datetime-local"
+                      id="fechaInPubli"
+                      class="no-autoinit"
+                      name="fechaInPubli"
+                      required
+                    />
+                  </div>
+
+                  <!-- Fecha de Salida -->
+                  <div class="col s12 l6">
+                    <label class="left" for="fechaOutPubli">Fecha final</label>
+                    <input
+                      type="datetime-local"
+                      class="no-autoinit"
+                      id="fechaOutPubli"
+                      required
+                    />
+                  </div>
+
+                  <!-- checkbox Penalty -->
+                  <div class="input-field col s6">
+                    <p>
+                      <label class="right">
+                        <input
+                          type="checkbox"
+                          class="filled-in"
+                          id="penaltyPubli"
+                        />
+                        <span>Penalty</span>
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s6">
+                    <label class="left" for="duracionPenaltyPubli"
+                      >duracion del Penalty:</label
+                    >
+                    <input
+                      type="time"
+                      id="duracionPenaltyPubli"
+                      name="duracionPenaltyPubli"
+                      value="00:00"
+                    />
                   </div>
                 </div>
-
-                <!-- Inicio Jornada -->
-
-                <div class="col s12 l6">
-                  <label class="left" for="fechaInPubli">Fecha Inicio</label>
-                  <input
-                    type="datetime-local"
-                    id="fechaInPubli"
-                    name="fechaInPubli"
-                    required
-                  />
-                </div>
-
-                <!-- Fecha de Salida -->
-                <div class="col s12 l6">
-                  <label class="left" for="fechaOutPubli">Fecha final</label>
-                  <input type="datetime-local" id="fechaOutPubli" required />
-                </div>
-
-                <!-- checkbox Penalty -->
-                <div class="input-field col s6">
-                  <p>
-                    <label class="right">
-                      <input
-                        type="checkbox"
-                        class="filled-in"
-                        id="penaltyPubli"
-                      />
-                      <span>Penalty</span>
-                    </label>
-                  </p>
-                </div>
-                <div class="col s6">
-                  <label class="left" for="duracionPenaltyPubli"
-                    >duracion del Penalty:</label
-                  >
-                  <input
-                    type="time"
-                    id="duracionPenaltyPubli"
-                    name="duracionPenaltyPubli"
-                    value="00:00"
-                  />
-                </div>
-
                 <!-- botones calcular y reset -->
                 <div class="container col s12">
                   <div class="center">
                     <button
-                      class="btn"
+                      class="btn-small"
                       type="button"
                       id="btnAgregarDiaPubli"
                       disabled
                     >
                       Agregar dia
                     </button>
+                    <button
+                      class="btn-small right"
+                      type="button"
+                      id="botonCierrePubli"
+                      style="display: none"
+                    >
+                      Calcular Cierre
+                    </button>
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <div id="ModuloDiasPubli">
+          <div class="row" id="moduloDiasPubli">
             <div class="row">
               <ul id="listaDiasPubli">
                 <!--  <li class="liJorCard">
@@ -194,30 +209,15 @@
               </ul>
             </div>
           </div>
-          <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red darken-2">
-              <i class="large material-icons">more_vert</i>
-            </a>
-            <ul>
-              <li>
-                <a
-                  class="btn-floating green tooltipped"
-                  data-position="left"
-                  data-tooltip="Agregar Dia"
-                  id="addBtn"
-                  ><i class="material-icons">add</i></a
-                >
-              </li>
-              <li>
-                <a
-                  class="btn-floating yellow darken-1 tooltipped"
-                  data-position="left"
-                  data-tooltip="Calcular Cierre"
-                  id="botonCierre"
-                  ><i class="material-icons">calculate</i>
-                </a>
-              </li>
-            </ul>
+          <div class="modulo" id="modCierrePubli" style="display: none">
+            <div class="row">
+              <div class="col s12" id="resultadoCierrePubli">
+                <ul id="resultadocierrePubli"></ul>
+              </div>
+            </div>
+            <div class="col s12">
+              <button class="btn red waves" id="btnVolver">volver</button>
+            </div>
           </div>
         </div>
       </div>
@@ -225,19 +225,13 @@
 
     <script src="js/horasPubli.js"></script>
     <script src="js/navegacionHoras.js"></script>
-    <script src="js/inicializar.js"></script>
+    <script src="js/inicializarB.js"></script>
     <script src="js/publiJun2023fix.js"></script>
     <script src="js/about.js"></script>
     <script src="js/largoJun2023.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
-      $(document).ready(function () {
-        $(".modal").modal();
-      });
-      $(document).ready(function () {
-        $(".tooltipped").tooltip({ delay: 50 });
-      });
       $(document).ready(function () {
         $(".datepicker").datepicker({
           format: "dd/mm/yyyy",
@@ -253,15 +247,6 @@
           vibrate: true, // vibrate the device when dragging clock hand
         });
       });
-      $(document).ready(function () {
-        $(".fixed-action-btn").floatingActionButton();
-      });
-      $(document).ready(function () {
-        $(".tooltipped").tooltip();
-      });
-    </script>
-    <script>
-      //var instance = M.Datepicker.getInstance(elem);
     </script>
   </body>
 </html>
