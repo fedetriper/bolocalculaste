@@ -20,21 +20,6 @@ let valorXtraOtre;
 let valorXtraOtre200;
 let valorXtraOtre300;
 let otreSelectedTrue = false;
-let listaValores8Publi = [
-  0, 38790, 32321, 22597, 15113, 38790, 22597, 15113, 15029, 29093, 22597,
-  15113, 168097, 68541, 45253, 32321, 28394, 58183, 32321, 50284, 45253, 34898,
-  25869, 45253, 34898, 45253, 34898, 45253, 34898, 45253, 25869, 68541, 31028,
-  45253, 42817, 29287, 22597, 15113, 36495, 22597, 15113, 73698, 38790, 27155,
-  6779,
-];
-let listaValores12Publi = [
-  0, 67882, 56562, 39544, 26448, 67882, 39544, 26448, 26300, 50913, 39544,
-  26448, 294170, 119946, 79192, 56562, 49690, 101821, 56562, 87997, 79192,
-  61072, 45270, 79192, 61072, 79192, 61072, 79192, 61072, 79192, 45270, 119946,
-  54299, 79192, 74929, 51253, 39544, 26448, 63866, 39544, 26448, 128971, 67882,
-  47522, 11863,
-];
-let textoEscActual = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza por defecto se pone la
 
 let rolesListPubli = [
   "Asistente De Dirección",
@@ -83,6 +68,45 @@ let rolesListPubli = [
   "Aprendiz",
   "Otro Rol",
 ];
+let listaValores8PubliSeleccionada;
+let listaValores12PubliSeleccionada;
+let switchEscalaPubli = document.getElementById("swEscalaPubli");
+let textoEscActual = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza por defecto se pone la
+let textoEscPasada = "Valores Junio 2023";
+let listaValores8PubliActual = [
+  //Agosto 2023
+  0, 38790, 32321, 22597, 15113, 38790, 22597, 15113, 15029, 29093, 22597,
+  15113, 168097, 68541, 45253, 32321, 28394, 58183, 32321, 50284, 45253, 34898,
+  25869, 45253, 34898, 45253, 34898, 45253, 34898, 45253, 25869, 68541, 31028,
+  45253, 42817, 29287, 22597, 15113, 36495, 22597, 15113, 73698, 38790, 27155,
+  6779,
+];
+let listaValores12PubliActual = [
+  //Agosto 2023
+  0, 67882, 56562, 39544, 26448, 67882, 39544, 26448, 26300, 50913, 39544,
+  26448, 294170, 119946, 79192, 56562, 49690, 101821, 56562, 87997, 79192,
+  61072, 45270, 79192, 61072, 79192, 61072, 79192, 61072, 79192, 45270, 119946,
+  54299, 79192, 74929, 51253, 39544, 26448, 63866, 39544, 26448, 128971, 67882,
+  47522, 11863,
+];
+
+// valores pasados
+let listaValores8PubliPasada = [
+  //junio 2023
+  0, 31282, 26066, 18223, 12188, 31282, 18223, 12188, 12120, 23462, 18223,
+  12188, 135562, 55275, 36494, 26066, 23231, 46922, 26066, 40551, 36494, 28143,
+  20862, 36494, 28143, 36494, 28143, 36494, 28143, 36494, 20862, 55275, 25023,
+  36494, 34529, 23619, 18223, 12188, 29431, 18223, 12188, 59434, 31282, 21899,
+  5467,
+];
+let listaValores12PubliPasada = [
+  // junio 2023
+  0, 54744, 45615, 31890, 21329, 54744, 31890, 21329, 21210, 41059, 31890,
+  21329, 237234, 96731, 63864, 45615, 40654, 82114, 45615, 70965, 63864, 49251,
+  36508, 63864, 49251, 63864, 49251, 63864, 49251, 63864, 36508, 96731, 43790,
+  63864, 60426, 41333, 31890, 21329, 51505, 31890, 21329, 104009, 54744, 38324,
+  9567,
+];
 
 document.getElementById("cantExtra200Publi").disabled = true;
 document.getElementById("cantExtra300Publi").disabled = true;
@@ -98,7 +122,44 @@ function llenarRolesPubli() {
     llenarLista.appendChild(el);
   }
 }
+swEscalaPubli.addEventListener("change", actualizarValores);
 
+function actualizarValores() {
+  // Obtener el valor seleccionado (true si está activado, false si no)
+  swEscalaPubl = switchEscalaPubli.checked;
+
+  // Llamar a la función opcionActualPasada con el valor del switch
+  const valoresActualizados = opcionActualPasada(switchEscalaPubl);
+
+  // Aquí puedes utilizar los valores actualizados como desees
+  console.log(valoresActualizados);
+}
+
+function opcionActualPasada(swEscalaPubli) {
+  listaValores8PubliSeleccionada = swEscalaPubli
+    ? listaValores8PubliActual
+    : listaValores8PubliPasada;
+  listaValores12PubliSeleccionada = swEscalaPubli
+    ? listaValores12PubliActual
+    : listaValores12PubliPasada;
+  valoresActualesSica = swEscalaPubli ? textoEscActual : textoEscPasada;
+
+  if (swEscalaPubli) {
+    // Si el switch está activado, utilizar los valores actuales
+    listaValores8PubliSeleccionada = listaValores8PubliActual;
+    listaValores12PubliSeleccionada = listaValores12PubliActual;
+    valoresActualesSica = document.getElementById(
+      "fechaActualPubli"
+    ).innerHTML = textoEscActual;
+  } else {
+    // Si el switch no está activado, utilizar los valores pasados
+    listaValores8PubliSeleccionada = listaValores8PubliPasada;
+    listaValores12PubliSeleccionada = listaValores12PubliPasada;
+    valoresActualesSica = document.getElementById(
+      "fechaActualPubli"
+    ).innerHTML = textoEscPasada;
+  }
+}
 function afterSelecPubli() {
   /* unblock inputs */
 
@@ -159,23 +220,28 @@ function OtreSelected() {
   }
 }
 
-function mostrarRolesSica() {
+function mostrarRolesSica(swEscalaPubli) {
   valoresActualesSica = document.getElementById("fechaActualPubli").innerHTML =
-    textoEscActual;
+    textoEscActual; // CAMBIAR FECHA Cuando Se Actualiza
 
   $("#valoresSicaPubli").slideDown();
 
   document.getElementById("showValorJ8Publi").innerHTML =
     "$" +
-    listaValores8Publi[document.getElementById("rolesPubli").selectedIndex];
+    listaValores8PubliSeleccionada[
+      document.getElementById("rolesPubli").selectedIndex
+    ];
   document.getElementById("showValorJ12Publi").innerHTML =
     "$" +
-    listaValores12Publi[document.getElementById("rolesPubli").selectedIndex];
+    listaValores12PubliSeleccionada[
+      document.getElementById("rolesPubli").selectedIndex
+    ];
   document.getElementById("showValorXtraPubli").innerHTML =
     "$" +
     (
-      listaValores8Publi[document.getElementById("rolesPubli").selectedIndex] /
-      4
+      listaValores8PubliSeleccionada[
+        document.getElementById("rolesPubli").selectedIndex
+      ] / 4
     ).toFixed(2);
 }
 
@@ -213,9 +279,13 @@ function calculoPubli() {
     valorExt300Publi = (valor8hsOtre / 8) * 4;
   } else {
     valor8Publi =
-      listaValores8Publi[document.getElementById("rolesPubli").selectedIndex];
+      listaValores8PubliSeleccionada[
+        document.getElementById("rolesPubli").selectedIndex
+      ];
     valor12Publi =
-      listaValores12Publi[document.getElementById("rolesPubli").selectedIndex];
+      listaValores12PubliSeleccionada[
+        document.getElementById("rolesPubli").selectedIndex
+      ];
     valorExtPubli = valor8Publi / 4;
     valorExt200Publi = (valor8Publi / 8) * 3;
     valorExt300Publi = (valor8Publi / 8) * 4;
@@ -325,7 +395,7 @@ function printTableTotalPubli() {
   document.getElementById("impDescPubli").innerHTML = "-$ " + descAplicarPubli;
   //totales
   document.getElementById("printTotalBrutoPubli").innerHTML =
-    "Total Bruto $" + totalBrutoPubli;
+    "Total Bruto $" + totalBrutoPubli.toFixed(2);
   document.getElementById("printTotalNetoPubli").innerHTML =
     "Total Neto $" + totalNetoPubli;
 }
