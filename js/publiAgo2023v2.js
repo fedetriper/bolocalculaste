@@ -171,9 +171,10 @@ function afterSelecPubli() {
   if (document.getElementById("rolesPubli").value == "Otro Rol") {
     OtreSelected();
     otreSelectedTrue = true;
+    document.getElementById("swEscalaPubli").disabled = true;
   } else {
     mostrarRolesSica();
-
+    document.getElementById("swEscalaPubli").disabled = false;
     otreSelectedTrue = false;
   }
 }
@@ -202,9 +203,7 @@ function OtreSelected() {
       valorXtraOtre = valor8hsOtre / 4;
       valorXtraOtre200 = (valor8hsOtre / 8) * 3;
       valorXtraOtre300 = (valor8hsOtre / 8) * 4;
-      valoresActualesSica = document.getElementById(
-        "fechaActualPubli"
-      ).innerHTML = "Valores Personalizados";
+      valoresActualesSica.innerHTML = "Valores Personalizados";
       /* document.getElementById("valoresSicaPubli").setAttribute("class", "modulo"); */
       $("#valoresSicaPubli").slideDown();
       document.getElementById("showValorJ8Publi").innerHTML =

@@ -3,7 +3,7 @@ let valorSemanaLargo;
 let valorRefuerzoLargo;
 let valorSabLargo;
 let valorDomLargo;
-let etra50Largo;
+let extra50Largo;
 let extra100Largo;
 let sacLargo = 0;
 let vacLargo = 0;
@@ -12,22 +12,30 @@ let totalBrutoLargo;
 let totalNetoLargo;
 let llenarLista;
 let otreSelectedLargo = false;
-let valoresActualesSicaLargo;
+let valoresActualesSicaLargo = document.getElementById("fechaActualLargo");
 let refuerzoChecked = false;
 let valorSemanaOtre;
 
-let textoEscalaLargo = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza
+let textoEscLargoActual = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza
+let textoEscLargoPasada = "Valores Junio 2023"; // CAMBIAR FECHA Cuando Se Actualiza
+let textoEscLargoSel = textoEscLargoActual;
+
 // lista de valores Agosto 2023
-let listaValoresLargo = [
-  0,
-
-  149858, 112987, 83530, 140470, 103199, 149858, 112987, 112987, 83530, 149858,
-  103199, 166962, 147339, 134040, 112987, 88372, 112987, 103199, 83530, 83530,
-  88372, 112987, 103199, 93364, 83530, 83530, 166962, 142497, 112987, 103199,
-  142497, 103199, 83530, 103199, 83530, 103199, 112987, 98259, 83530, 142497,
-  112987, 142497, 112987, 112987, 166962, 114555, 83530, 40079,
+let listaValoresLargoActual = [
+  0, 149858, 112987, 83530, 140470, 103199, 149858, 112987, 112987, 83530,
+  149858, 103199, 166962, 147339, 134040, 112987, 88372, 112987, 103199, 83530,
+  83530, 88372, 112987, 103199, 93364, 83530, 83530, 166962, 142497, 112987,
+  103199, 142497, 103199, 83530, 103199, 83530, 103199, 112987, 98259, 83530,
+  142497, 112987, 142497, 112987, 112987, 166962, 114555, 83530, 40079,
 ];
-
+let listaValoresLargoPasada = [
+  // lista de valores jun 2023
+  0, 134872, 101689, 75177, 126423, 92879, 134872, 101689, 101689, 75177,
+  134872, 92879, 150266, 132605, 120636, 101689, 79535, 101689, 92879, 75177,
+  75177, 79535, 101689, 92879, 84028, 75177, 75177, 150266, 128247, 101689,
+  92879, 128247, 92879, 75177, 92879, 75177, 92879, 101689, 88433, 75177,
+  128247, 101689, 128247, 101689, 101689, 150266, 103100, 75177, 36071,
+];
 let listaRolesLargo = [
   //lista de roles 2023
   "Jefe/a de Producción",
@@ -80,6 +88,40 @@ let listaRolesLargo = [
   "Aprendiz",
   "Otro Rol",
 ];
+let listaValoresLargo = listaValoresLargoActual;
+let swEscalaLargoElement = document.getElementById("swEscalaLargo");
+// Agregar el event listener al elemento de selección
+swEscalaLargoElement.addEventListener("change", actualizarValoresLargo);
+
+// Función que se llamará cada vez que cambie la selección
+function actualizarValoresLargo() {
+  // Obtener el valor seleccionado (true si está activado, false si no)
+  const switchEscalaLargo = swEscalaLargoElement.checked;
+
+  // Llamar a la función opcionActualPasada con el valor del switch
+  const valoresActualizadosLargo = opcionActualPasadaLargo(switchEscalaLargo);
+
+  // Aquí puedes utilizar los valores actualizados como desees
+  console.log(valoresActualizadosLargo);
+}
+function opcionActualPasadaLargo(switchEscalaLargo) {
+  // Utilizar el operador ternario para asignar los valores adecuados según el valor del switch
+  listaValoresLargo = switchEscalaLargo
+    ? listaValoresLargoActual
+    : listaValoresLargoPasada;
+
+  textoEscLargoSel = switchEscalaLargo
+    ? textoEscLargoActual
+    : textoEscLargoPasada;
+
+  // Aquí puedes realizar cualquier otra operación que necesites con los valores resultantes
+  rolesSicaLargo();
+
+  // Finalmente, puedes devolver o hacer uso de los valores resultantes
+  return {
+    listaValoresLargo,
+  };
+}
 
 /* funciones */
 
@@ -98,10 +140,11 @@ function afterSelecLargo() {
   if (document.getElementById("rolesLargo").value == "Otro Rol") {
     OtreSelectedLargo();
     otreSelectedLargo = true;
+    document.getElementById("swEscalaLargo").disabled = true;
   } else {
-    cargarValoresLargo();
     rolesSicaLargo();
 
+    document.getElementById("swEscalaLargo").disabled = false;
     otreSelectedLargo = false;
   }
 }
@@ -132,9 +175,7 @@ function OtreSelectedLargo() {
       );
       $("#valoresSicaLargo").slideDown();
 
-      valoresActualesSicaLargo = document.getElementById(
-        "fechaActualLargo"
-      ).innerHTML = "Valores Personalizados";
+      valoresActualesSicaLargo.innerHTML = "Valores Personalizados";
       document.getElementById("showValorSemanalLargo").innerHTML =
         "$" + Number(valorSemanaOtre).toFixed(2);
       document.getElementById("showValorXtraLargo").innerHTML =
@@ -156,9 +197,8 @@ function cargarValoresLargo() {
 }
 
 function rolesSicaLargo() {
-  valoresActualesSicaLargo = document.getElementById(
-    "fechaActualLargo"
-  ).innerHTML = textoEscalaLargo;
+  valoresActualesSicaLargo.innerHTML = textoEscLargoSel;
+  cargarValoresLargo();
 
   $("#valoresSicaLargo").slideDown();
 
