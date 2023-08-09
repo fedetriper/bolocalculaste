@@ -12,6 +12,7 @@ h4 {
   padding-left: 10px;
 
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 .marging {
   margin: 10px;
@@ -24,6 +25,9 @@ h4 {
 }
 .mt10 {
   margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
 }
 .sidenavImage {
   display: block;
@@ -84,4 +88,54 @@ li p {
 .btn-cierre {
   margin-bottom: 10px;
   margin-right: 10px;
+}
+
+.fixBottom {
+  position: fixed;
+  bottom: 0;
+  left: 90%;
+  transform: translateX(-50%);
+  /* El transform: translateX(-50%) es para centrar el elemento horizontalmente */
+}
+.footerHoras {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.negrita {
+  border: 2px solid #4db6ac;
+  background-color: #4db6ac;
+  border-radius: 25px;
+  padding: 5px 5px;
+  display: inline-block;
+  color: #f2faf9;
+  width: 8rem;
+}
+.switch
+  label
+  input[type="checkbox"]:not(:checked):not(:disabled)
+  + .lever:after {
+  background-color: teal;
+}
+/* Estilo para el lever */
+.switch label input[type="checkbox"] + .lever {
+  width: 40px; /* Ancho fijo para el lever */
+}
+
+.hidden {
+  opacity: 0;
+  transform: scale(0);
+}
+#btnSumarDia {
+  margin-right: 7px;
+}
+#moduloJorGuardadas {
+  height: 100vh;
 }

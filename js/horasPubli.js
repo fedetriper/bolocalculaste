@@ -9,19 +9,21 @@ const jornadasArray = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   //pone en default el penalty
+  duracionPenaltyInput.style.display = "none";
+  duracionPenaltyInput.value = "00:00";
   penaltyCheckbox.addEventListener("change", () => {
     duracionPenaltyInput.style.display = penaltyCheckbox.checked
       ? "block"
       : "none";
   });
-  //al presionar el boton agregar dia
-  btnAgregarDia.addEventListener("click", (e) => {
+  //al presionar el boton GuardarDia
+  btnGuardarDia.addEventListener("click", (e) => {
     e.preventDefault();
     const fechaIn = fechaInControl.value;
     const fechaOut = fechaOutControl.value;
     const penalty = penaltyPubli.checked;
     const duracionPenalty = penalty
-      ? parseFloat(duracionPenaltyPubli.value)
+      ? parseFloat(duracionPenaltyInput.value)
       : 0.0;
 
     // Convert the datetime-local values to Date objects
@@ -56,18 +58,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reset the form after adding jornada
     fechaInControl.value = "";
     fechaOutControl.value = "";
-    tipoJornada.checked = false;
+    tipoJornada.checked = true;
     penaltyPubli.checked = false;
-    duracionPenaltyPubli.value = "00:00";
-    duracionPenaltyPubli.style.display = "none";
+    duracionPenaltyInput.value = "00:00";
+    duracionPenaltyInput.style.display = "none";
     updateButtonState();
+    //muestra y oculta las secciones
+    // moduloHorasPubli.classList.add("hidden");
+    // moduloJorGuardadas.classList.remove("hidden");
+    moduloJorGuardadas.style.display = "block";
+    moduloHorasPubli.style.display = "none";
+    btnSumarDia.style.display = "block";
   });
 });
-duracionPenaltyInput.style.display = "none";
-duracionPenaltyInput.value = "00:00";
+// duracionPenaltyInput.style.display = "none";
+// duracionPenaltyInput.value = "00:00";
 
 const ul = document.getElementById("listaDiasPubli");
-const btnAgregarDia = document.getElementById("btnAgregarDiaPubli");
+const btnGuardarDia = document.getElementById("btnGuardarDiaPubli");
 
 //blockea y desbloquea botton
 function updateButtonState() {
@@ -75,7 +83,7 @@ function updateButtonState() {
     fechaInControl.checkValidity() &&
     fechaOutControl.checkValidity() &&
     tipoJornada.checkValidity();
-  btnAgregarDia.disabled = !isFormValid;
+  btnGuardarDia.disabled = !isFormValid;
 }
 
 fechaInControl.addEventListener("input", updateButtonState);
@@ -100,7 +108,7 @@ function AgregarJor12(fechaIn, fechaOut, penalty, duracionPenalty) {
     if (regularHours > 16) {
       overtimeHours200 = Math.min(2, regularHours - 16);
       if (regularHours > 18) {
-        overtimeHours300 = regularHours - 18;
+        overtimeHours300 = Math.max(0, regularHours - 18);
       }
     }
   }
@@ -159,7 +167,9 @@ function AgregarJor8(fechaIn, fechaOut) {
   const regularRate = 1.0; // Regular rate is 100%
 
   const totalPay = regularHours * regularRate;
+
   jornadaNumero++;
+
   const jornada = {
     numero: jornadaNumero,
     tipo: "8hs",
@@ -185,7 +195,6 @@ function extractDateAndTime(dateTime) {
   return { date: datePart, time: timePart };
 }
 
-//crea la lista
 function CrearLista(jornada) {
   const fechaInicio = new Date(jornada.inicio.date + "T" + jornada.inicio.time);
   const fechaFin = new Date(jornada.inicio.date + "T" + jornada.fin.time);
@@ -203,34 +212,71 @@ function CrearLista(jornada) {
     ? duracionPenaltyInput.value
     : "00:00";
 
-  const text = `Dia:<strong>${jornada.numero}</strong> - J: <strong>${
-    jornada.tipo
-  } </strong> <strong>${fechaInicioFormatted}</strong> Entrada <strong>${horaInicioFormatted}</strong> Salida <strong>${horaFinFormatted}</strong>${
-    penaltyCheckbox.checked ? `<strong> P:</strong> ${penaltyDuration}` : ""
-  }`;
+  const li = document.createElement("li");
+  li.className = "collection-item left-align";
 
-  if (text !== "") {
-    const li = document.createElement("li");
-    const p = document.createElement("p");
-    const div = document.createElement("div");
-    const deleteBtn = document.createElement("button");
+  const spanDia = document.createElement("span");
+  spanDia.innerHTML = `<strong>Dia ${jornada.numero}</strong>`;
+  li.appendChild(spanDia);
 
-    p.innerHTML = text;
+  const spanFecha = document.createElement("span");
+  spanFecha.innerHTML = ` ${fechaInicioFormatted}`;
+  li.appendChild(spanFecha);
 
-    li.appendChild(p);
-    li.className = "liJorCard";
-    ul.appendChild(li);
-    li.appendChild(deleteBtn);
-    deleteBtn.textContent = "X";
-    deleteBtn.className = "btn-delete red darken-3";
+  const spanHoraInicio = document.createElement("span");
+  spanHoraInicio.className = "green-text";
+  spanHoraInicio.innerHTML = ` ${horaInicioFormatted} `;
+  li.appendChild(spanHoraInicio);
 
-    deleteBtn.addEventListener("click", () => {
-      DeleteJornada(jornada.numero);
-    });
+  const spanGuion = document.createElement("span");
+  spanGuion.innerHTML = `<span> - </span>`;
+  li.appendChild(spanGuion);
+
+  const spanHoraFin = document.createElement("span");
+  spanHoraFin.className = "red-text";
+  spanHoraFin.innerHTML = `${horaFinFormatted}`;
+  li.appendChild(spanHoraFin);
+
+  const deleteBtn = document.createElement("a");
+  deleteBtn.href = "#!";
+  deleteBtn.className = "secondary-content";
+  deleteBtn.innerHTML = `<i class="material-icons red-text">delete</i>`;
+  li.appendChild(deleteBtn);
+
+  if (jornada.tipo === "8hs") {
+    const spanTipoJornada = document.createElement("span");
+    spanTipoJornada.innerHTML = ` Jornada de 8hs`;
+    li.appendChild(spanTipoJornada);
+  } else if (jornada.tipo === "12hs") {
+    const spanHorasExtras = document.createElement("span");
+    spanHorasExtras.innerHTML = `<br /><strong>Hs Ext</strong> 100% ${jornada.overtimeHours100.toFixed(
+      2
+    )} - 200% ${jornada.overtimeHours200.toFixed(
+      2
+    )} - 300% ${jornada.overtimeHours300.toFixed(2)}`;
+    li.appendChild(spanHorasExtras);
+
+    if (jornada.penalty) {
+      const spanPenalty = document.createElement("span");
+      spanPenalty.className = "red-text";
+      spanPenalty.innerHTML = ` <span class="red-text">P</span> ${jornada.duracionPenalty}`;
+      li.appendChild(spanPenalty);
+    }
   }
+
+  ul.appendChild(li);
+
+  deleteBtn.addEventListener("click", () => {
+    const confirmDelete = window.confirm("¿Quieres eliminar esta jornada?");
+    if (confirmDelete) {
+      DeleteJornada(jornada.numero);
+    }
+  });
+
   const botonCierrePubli = document.getElementById("botonCierrePubli");
   botonCierrePubli.style.display = jornadasArray.length > 0 ? "block" : "none";
 }
+
 //borrar jornada
 function DeleteJornada(jornadaNumeroToDelete) {
   const index = jornadasArray.findIndex(
@@ -258,6 +304,7 @@ function UpdateJornadasList() {
     jornada.numero = index + 1; // Update the jornada number based on the index
     CrearLista(jornada);
   });
+  jornadaNumero--;
 }
 
 // Calculate the statistics and create the result object
@@ -323,13 +370,15 @@ function MostrarCierrePubli(resultadoCierre) {
   const modCierrePubli = document.getElementById("modCierrePubli");
   modCierrePubli.style.display = "block";
   //oculta input
-  const inputUsuarioHorasPubli = document.getElementById(
-    "inputUsuarioHorasPubli"
-  );
-  inputUsuarioHorasPubli.style.display = "none";
+
+  moduloHorasPubli.style.display = "none";
   //oculta jornadas
-  const moduloDiasPubli = document.getElementById("moduloDiasPubli");
-  moduloDiasPubli.style.display = "none";
+
+  moduloJorGuardadas.style.display = "none";
+  //oculta botones
+  btnSumarDia.style.display = "none";
+  const botonCierrePubli = document.getElementById("botonCierrePubli");
+  botonCierrePubli.style.display = "none";
 
   const ul = document.getElementById("resultadocierrePubli");
   ul.innerHTML = ""; // Clear any existing list items
@@ -343,19 +392,27 @@ function MostrarCierrePubli(resultadoCierre) {
   ul.appendChild(li2);
 
   const li3 = document.createElement("li");
-  li3.textContent = `Horas Extras al 100%: ${resultadoCierre.totalHorasExtras100}`;
+  li3.textContent = `Horas Extras al 100%: ${resultadoCierre.totalHorasExtras100.toFixed(
+    2
+  )}`;
   ul.appendChild(li3);
 
   const li4 = document.createElement("li");
-  li4.textContent = `Horas Extras al 200%: ${resultadoCierre.totalHorasExtras200}`;
+  li4.textContent = `Horas Extras al 200%: ${resultadoCierre.totalHorasExtras200.toFixed(
+    2
+  )}`;
   ul.appendChild(li4);
 
   const li5 = document.createElement("li");
-  li5.textContent = `Horas Extras al 300%: ${resultadoCierre.totalHorasExtras300}`;
+  li5.textContent = `Horas Extras al 300%: ${resultadoCierre.totalHorasExtras300.toFixed(
+    2
+  )}`;
   ul.appendChild(li5);
 
   const li6 = document.createElement("li");
-  li6.textContent = `Horas Penalty: ${resultadoCierre.totalHorasPenalty}`;
+  li6.textContent = `Horas Penalty: ${resultadoCierre.totalHorasPenalty.toFixed(
+    2
+  )}`;
   ul.appendChild(li6);
 }
 function btnVolver() {
@@ -364,12 +421,13 @@ function btnVolver() {
     // Hide the modCierrePubli div
     const modCierrePubli = document.getElementById("modCierrePubli");
     modCierrePubli.style.display = "none";
+    moduloJorGuardadas.style.display = "none";
+    moduloHorasPubli.style.display = "block";
 
     // Show the inputUsuarioHorasPubli div
     const inputUsuarioHorasPubli = document.getElementById(
       "inputUsuarioHorasPubli"
     );
-    inputUsuarioHorasPubli.style.display = "block";
 
     // Reset the form values
     const fechaInControl = document.getElementById("fechaInPubli");
@@ -390,3 +448,28 @@ function btnVolver() {
     UpdateJornadasList();
   });
 }
+
+const btnSumarDia = document.getElementById("btnSumarDia");
+const moduloHorasPubli = document.getElementById("seccionHorasPubli");
+const moduloJorGuardadas = document.getElementById("moduloJorGuardadas");
+
+btnSumarDia.addEventListener("click", () => {
+  moduloHorasPubli.style.display = "block";
+  moduloJorGuardadas.style.display = "none";
+  btnSumarDia.style.display = "none";
+  const botonCierrePubli = document.getElementById("botonCierrePubli");
+  botonCierrePubli.style.display = "none";
+});
+
+tipoJornada.addEventListener("change", () => {
+  const spanJ12 = document.getElementById("swJ12");
+  const spanJ8 = document.getElementById("swJ8");
+  if (tipoJornada.checked) {
+    console.log("checked");
+    spanJ12.classList.add("negrita");
+    spanJ8.classList.remove("negrita");
+  } else {
+    spanJ12.classList.remove("negrita");
+    spanJ8.classList.add("negrita");
+  }
+});

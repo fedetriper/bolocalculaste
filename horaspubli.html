@@ -105,108 +105,106 @@
       </li>
     </ul>
     <main>
-      <div class="center container">
-        <div class="section" id="seccionHorasPubli">
-          <div class="row modulo" id="inputUsuarioHorasPubli">
-            <form class="col s12" id="formIngresoHorasPubli">
-              <!-- input datos de la jornada -->
-              <div class="row" id="inputJorHorariosPubli">
-                <div class="col s12" id="ingresarDatosPubli">
-                  <div class="row input-field">
-                    <div class="switch col s12" id="selectorTipoJornadaPubli">
-                      <label class="mb10">
-                        Jornada de 8hs
-                        <input type="checkbox" id="swTipoJornada" />
-                        <span class="lever"></span>
-                        Jornada de 12hs
-                      </label>
-                      <div class="divider mt10"></div>
+      <div class="center">
+        <div class="section" id="seccionCalculoHoras">
+          <!-- modulo Horas Publi -->
+          <div
+            class="modulo mb10 mt20"
+            id="seccionHorasPubli"
+            style="display: block"
+          >
+            <div class="row">
+              <div class="col s12 mt10">
+                <span class="flow-text">ingrese los datos de la jornada</span>
+              </div>
+            </div>
+            <div class="" id="inputUsuarioHorasPubli">
+              <form class="col s12" id="formIngresoHorasPubli">
+                <!-- input datos de la jornada -->
+                <div class="row" id="inputJorHorariosPubli">
+                  <div class="col s12" id="ingresarDatosPubli">
+                    <div class="row input-field">
+                      <div class="switch col s12" id="selectorTipoJornadaPubli">
+                        <label class="mb10">
+                          <span id="swJ8"> Jornada de 8hs </span>
+                          <input type="checkbox" id="swTipoJornada" checked />
+                          <span class="lever"></span>
+                          <span class="negrita" id="swJ12">
+                            Jornada de 12hs
+                          </span>
+                        </label>
+                        <div class="divider mt10"></div>
+                      </div>
+                    </div>
+
+                    <!-- Inicio Jornada -->
+
+                    <div class="col s12 l6">
+                      <label class="left" for="fechaInPubli"
+                        >Fecha Inicio</label
+                      >
+                      <input
+                        type="datetime-local"
+                        id="fechaInPubli"
+                        class="no-autoinit"
+                        name="fechaInPubli"
+                        required
+                      />
+                    </div>
+
+                    <!-- Fecha de Salida -->
+                    <div class="col s12 l6">
+                      <label class="left" for="fechaOutPubli"
+                        >Fecha final</label
+                      >
+                      <input
+                        type="datetime-local"
+                        class="no-autoinit"
+                        id="fechaOutPubli"
+                        required
+                      />
+                    </div>
+
+                    <!-- checkbox Penalty -->
+                    <div class="input-field col s6">
+                      <p>
+                        <label class="right">
+                          <input
+                            type="checkbox"
+                            class="filled-in"
+                            id="penaltyPubli"
+                          />
+                          <span>Penalty</span>
+                        </label>
+                      </p>
+                    </div>
+                    <div class="col s6">
+                      <label class="left" for="duracionPenaltyPubli"
+                        >duracion del Penalty:</label
+                      >
+                      <input
+                        type="time"
+                        id="duracionPenaltyPubli"
+                        name="duracionPenaltyPubli"
+                        value="00:00"
+                      />
                     </div>
                   </div>
-
-                  <!-- Inicio Jornada -->
-
-                  <div class="col s12 l6">
-                    <label class="left" for="fechaInPubli">Fecha Inicio</label>
-                    <input
-                      type="datetime-local"
-                      id="fechaInPubli"
-                      class="no-autoinit"
-                      name="fechaInPubli"
-                      required
-                    />
-                  </div>
-
-                  <!-- Fecha de Salida -->
-                  <div class="col s12 l6">
-                    <label class="left" for="fechaOutPubli">Fecha final</label>
-                    <input
-                      type="datetime-local"
-                      class="no-autoinit"
-                      id="fechaOutPubli"
-                      required
-                    />
-                  </div>
-
-                  <!-- checkbox Penalty -->
-                  <div class="input-field col s6">
-                    <p>
-                      <label class="right">
-                        <input
-                          type="checkbox"
-                          class="filled-in"
-                          id="penaltyPubli"
-                        />
-                        <span>Penalty</span>
-                      </label>
-                    </p>
-                  </div>
-                  <div class="col s6">
-                    <label class="left" for="duracionPenaltyPubli"
-                      >duracion del Penalty:</label
-                    >
-                    <input
-                      type="time"
-                      id="duracionPenaltyPubli"
-                      name="duracionPenaltyPubli"
-                      value="00:00"
-                    />
+                  <!-- boton guardar dia -->
+                  <div class="container col s12">
+                    <div class="center">
+                      <button
+                        class="btn-small"
+                        type="button"
+                        id="btnGuardarDiaPubli"
+                        disabled
+                      >
+                        Guardar
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <!-- botones calcular y reset -->
-                <div class="container col s12">
-                  <div class="center">
-                    <button
-                      class="btn-small"
-                      type="button"
-                      id="btnAgregarDiaPubli"
-                      disabled
-                    >
-                      Agregar dia
-                    </button>
-                    <button
-                      class="btn-small right"
-                      type="button"
-                      id="botonCierrePubli"
-                      style="display: none"
-                    >
-                      Calcular Cierre
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="row" id="moduloDiasPubli">
-            <div class="row">
-              <ul id="listaDiasPubli">
-                <!--  <li class="liJorCard">
-                  dia1
-                  <button class="btn waves-effect btn-delete red darken-3">
-                    X
-                  </button>
-                </li> -->
-              </ul>
+              </form>
             </div>
           </div>
           <div class="modulo" id="modCierrePubli" style="display: none">
@@ -219,16 +217,79 @@
               <button class="btn red waves" id="btnVolver">volver</button>
             </div>
           </div>
+          <div class="" id="moduloJorGuardadas" style="display: none">
+            <div class="row">
+              <div class="col s3"></div>
+              <div class="col s6"><h5>Jornadas</h5></div>
+              <div class="col s3"></div>
+            </div>
+            <div class="row" id="moduloDiasPubli">
+              <ul class="collection" id="listaDiasPubli"></ul>
+            </div>
+            <!-- modelo de lista
+            <div class="row">
+              <ul class="collection">
+                <li class="collection-item left-align">
+                  <span><strong>Dia 1</strong></span>
+                  <span> 25/07</span>
+                  <span class="green-text"> 11:00 </span> <span>-</span>
+                  <span class="red-text">14:00</span>
+                  <a href="#!" class="secondary-content"
+                    ><i class="material-icons red-text">delete</i></a
+                  >
+                  <br />
+                  <span>Jornada de 8hs</span>
+                </li>
+                <li class="collection-item left-align">
+                  <span><strong>Dia 2</strong></span>
+                  <span> 26/07</span>
+                  <span class="green-text"> 06:00 </span> <span>-</span>
+                  <span class="red-text">23:00</span>
+                  <a href="#!" class="secondary-content"
+                    ><i class="material-icons red-text">delete</i></a
+                  >
+                  <br />
+                  <span><strong>Hs Ext</strong> 100% 4 - 200% 0 - 300% 0</span>
+                </li>
+                <li class="collection-item left-align">
+                  <span><strong>Dia 3</strong></span>
+                  <span> 27/07</span>
+                  <span class="green-text"> 06:00 </span> <span>-</span>
+                  <span class="red-text">04:00</span>
+                  <span> 28/07</span>
+                  <a href="#!" class="secondary-content"
+                    ><i class="material-icons red-text">delete</i></a
+                  >
+                  <br />
+                  <span
+                    ><strong>Hs Ext</strong> 100% 4 - 200% 2 - 300% 2
+                    <span class="red-text">P</span> 1</span
+                  >
+                </li>
+              </ul>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="footerHoras">
+          <a class="btn s6" id="btnSumarDia" style="display: none"
+            >Agregar Dia</a
+          >
+          <button
+            class="btn s6 right"
+            type="button"
+            id="botonCierrePubli"
+            style="display: none"
+          >
+            Calcular Cierre
+          </button>
         </div>
       </div>
     </main>
 
     <script src="js/horasPubli.js"></script>
     <script src="js/navegacionHoras.js"></script>
-    <script src="js/inicializarB.js"></script>
-    <script src="js/publiJun2023fix.js"></script>
-    <script src="js/about.js"></script>
-    <script src="js/largoJun2023.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
