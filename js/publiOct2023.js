@@ -1,4 +1,4 @@
-//script Modulo Publi
+//script Modulo Publi Ocubre 2023
 
 //declaracion Variables
 
@@ -13,28 +13,86 @@ let sacSvacPubli;
 let subTotalPubli; // bruto mas sac
 let totalBrutoPubli;
 let totalNetoPubli;
-let valoresActualesSica;
+let valoresActualesSica = document.getElementById("fechaActualPubli");
 let valor8hsOtre;
 let valor12hsOtre;
 let valorXtraOtre;
 let valorXtraOtre200;
 let valorXtraOtre300;
 let otreSelectedTrue = false;
-let listaValores8Publi = [
+let listaValores8PubliActual = [
+  0, 45046, 37534, 26241, 17551, 45046, 26241, 17551, 17453, 33786, 26241,
+  17551, 195210, 79595, 52551, 37534, 32696, 67568, 37534, 58394, 52551, 40527,
+  30041, 52551, 40527, 52551, 40527, 52551, 40527, 52551, 30041, 79595, 36033,
+  52551, 49722, 34011, 26241, 17551, 42381, 26241, 17551, 85584, 45046, 31535,
+  7872,
+];
+let listaValores12PubliActual = [
+  0, 78831, 65685, 45922, 30714, 78831, 45922, 30714, 30542, 59125, 45922,
+  30714, 341617, 139292, 91964, 65685, 57218, 118244, 65685, 102190, 91964,
+  70922, 52571, 91964, 70922, 91964, 70922, 91964, 70922, 91964, 52571, 139292,
+  63057, 91964, 87014, 59520, 45922, 30714, 74167, 45922, 30714, 149772, 78831,
+  55186, 13776,
+];
+
+let listaValores12Publi = listaValores12PubliActual;
+let listaValores8Publi = listaValores8PubliActual;
+// valores pasados
+let listaValores8PubliPasada = [
+  //Agosto 2023
   0, 38790, 32321, 22597, 15113, 38790, 22597, 15113, 15029, 29093, 22597,
   15113, 168097, 68541, 45253, 32321, 28394, 58183, 32321, 50284, 45253, 34898,
   25869, 45253, 34898, 45253, 34898, 45253, 34898, 45253, 25869, 68541, 31028,
   45253, 42817, 29287, 22597, 15113, 36495, 22597, 15113, 73698, 38790, 27155,
   6779,
 ];
-let listaValores12Publi = [
+let listaValores12PubliPasada = [
+  // Agosto 2023
   0, 67882, 56562, 39544, 26448, 67882, 39544, 26448, 26300, 50913, 39544,
   26448, 294170, 119946, 79192, 56562, 49690, 101821, 56562, 87997, 79192,
   61072, 45270, 79192, 61072, 79192, 61072, 79192, 61072, 79192, 45270, 119946,
   54299, 79192, 74929, 51253, 39544, 26448, 63866, 39544, 26448, 128971, 67882,
   47522, 11863,
 ];
-let textoEscActual = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza por defecto se pone la
+
+let textoEscActual = "Valores Octubre 2023"; // CAMBIAR FECHA Cuando Se Actualiza
+let textoEscPasada = "Valores Agosto 2023"; // CAMBIAR FECHA Cuando Se Actualiza
+let textoEscalaSel = textoEscActual;
+
+let swEscalaPubliElement = document.getElementById("swEscalaPubli");
+// Agregar el event listener al elemento de selección
+swEscalaPubliElement.addEventListener("change", actualizarValores);
+
+// Función que se llamará cada vez que cambie la selección
+function actualizarValores() {
+  // Obtener el valor seleccionado (true si está activado, false si no)
+  const switchEscalaPubli = swEscalaPubliElement.checked;
+
+  // Llamar a la función opcionActualPasada con el valor del switch
+  const valoresActualizados = opcionActualPasada(switchEscalaPubli);
+
+  // Aquí puedes utilizar los valores actualizados como desees
+  console.log(valoresActualizados);
+}
+function opcionActualPasada(switchEscalaPubli) {
+  // Suponiendo que listaValores8Actual, listaValores12Actual, listaValores8Pasada y listaValores12Pasada son arreglos definidos previamente
+
+  // Utilizar el operador ternario para asignar los valores adecuados según el valor del switch
+  listaValores8Publi = switchEscalaPubli
+    ? listaValores8PubliActual
+    : listaValores8PubliPasada;
+  listaValores12Publi = switchEscalaPubli
+    ? listaValores12PubliActual
+    : listaValores12PubliPasada;
+  textoEscalaSel = switchEscalaPubli ? textoEscActual : textoEscPasada;
+
+  // Aquí puedes realizar cualquier otra operación que necesites con los valores resultantes
+  mostrarRolesSica();
+  // Finalmente, puedes devolver o hacer uso de los valores resultantes
+  return {
+    listaValores8Publi: listaValores12Publi,
+  };
+}
 
 let rolesListPubli = [
   "Asistente De Dirección",
@@ -113,9 +171,10 @@ function afterSelecPubli() {
   if (document.getElementById("rolesPubli").value == "Otro Rol") {
     OtreSelected();
     otreSelectedTrue = true;
+    document.getElementById("swEscalaPubli").disabled = true;
   } else {
     mostrarRolesSica();
-
+    document.getElementById("swEscalaPubli").disabled = false;
     otreSelectedTrue = false;
   }
 }
@@ -137,14 +196,14 @@ function OtreSelected() {
 
       botonResetPubli();
     } else {
+      // user typed something valid and hit OK
+
       //console.log(valor12hsOtre);
       valor8hsOtre = valor12hsOtre / 1.75;
       valorXtraOtre = valor8hsOtre / 4;
       valorXtraOtre200 = (valor8hsOtre / 8) * 3;
       valorXtraOtre300 = (valor8hsOtre / 8) * 4;
-      valoresActualesSica = document.getElementById(
-        "fechaActualPubli"
-      ).innerHTML = "Valores Personalizados";
+      valoresActualesSica.innerHTML = "Valores Personalizados";
       /* document.getElementById("valoresSicaPubli").setAttribute("class", "modulo"); */
       $("#valoresSicaPubli").slideDown();
       document.getElementById("showValorJ8Publi").innerHTML =
@@ -158,8 +217,7 @@ function OtreSelected() {
 }
 
 function mostrarRolesSica() {
-  valoresActualesSica = document.getElementById("fechaActualPubli").innerHTML =
-    textoEscActual;
+  valoresActualesSica.innerHTML = textoEscalaSel;
 
   $("#valoresSicaPubli").slideDown();
 

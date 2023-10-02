@@ -1,898 +1,617 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="manifest.json" />
-    <title>Bolo Calculaste?</title>
-    <!-- Iconos -->
-    <link
-      rel="icon"
-      href="assets/bolo2favicon32px.png"
-      type="image/png"
-      sizes="32x32"
-    />
-    <!-- PARA LOS MODELOS MAS RECIENTES DE IPAD Y IPHONE -->
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="assets/icon_iphone.png"
-      type="image/png"
-      sizes="152x152"
-    />
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="assets/icon_iphone.png"
-      type="image/png"
-      sizes="120x120"
-    />
-    <!-- Estilos -->
-    <link rel="stylesheet" href="css/estilos_v2.css" />
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <!--Import Google Icon Font-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="manifest" href="/manifest.json" />
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- moment.js manejar fechas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
 
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="Last-Modified" content="0" />
-    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Bolo Calculaste?</title>
+  <!-- Iconos -->
+  <link rel="icon" href="assets/bolo2favicon32px.png" type="image/png" sizes="32x32" />
+  <!-- PARA LOS MODELOS MAS RECIENTES DE IPAD Y IPHONE -->
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="152x152" />
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="120x120" />
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos_v2.css" />
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- moment.js manejar fechas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
 
-  <body>
-    <header>
-      <!-- Navbar responsivo -->
-      <div class="navbar-fixed">
-        <nav class="nav-extended">
-          <div class="nav-wrapper red darken-3">
-            <a
-              href="#"
-              data-target="sidenavMobile"
-              class="sidenav-trigger show-on-large"
-              ><i class="material-icons">menu</i></a
-            >
-            <a href="#" class="brand-logo" id="currentScreen"
-              >BoloCalculaste?</a
-            >
-            <div>
-              <i
-                class="material-icons right modal-trigger"
-                href="#modalPubli"
-                id="help"
-                onclick="help()"
-                style="margin-right: 1em; display: none"
-                >help_outline</i
-              >
-            </div>
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Last-Modified" content="0" />
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+</head>
+
+<body>
+  <header>
+    <!-- Navbar responsivo -->
+    <div class="navbar-fixed">
+      <nav class="nav-extended">
+        <div class="nav-wrapper red darken-3">
+          <a href="#" data-target="sidenavMobile" class="sidenav-trigger show-on-large"><i
+              class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo" id="currentScreen">BoloCalculaste?</a>
+          <div>
+            <i class="material-icons right modal-trigger" href="#modalPubli" id="help" onclick="help()"
+              style="margin-right: 1em; display: none">help_outline</i>
           </div>
-        </nav>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- sidenav -->
+  <ul class="sidenav" id="sidenavMobile">
+    <li>
+      <img class="responsive-img sidenavImage" src="assets/icon_iphone.png" alt="icon for ios" />
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickInicio()"><i class="material-icons">home</i>Inicio</a>
+    </li>
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickPubli()"><i class="material-icons">camera</i>Publicidad</a>
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickLargo()"><i class="material-icons">movie</i>Largo</a>
+    </li>
+
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickAbout()"><i class="material-icons">announcement</i>Contacto</a>
+    </li>
+  </ul>
+
+  <!-- todo aca adentro!!!! -->
+  <main>
+    <div class="center">
+      <!-- secciones -->
+      <div class="section" id="screenInicio">
+        <div class="card" onclick="clickPubli()">
+          <div class="card-content">
+            <span class="card-title">Sección Publicidad</span>
+            <p>
+              En esta seccion podes usar la Calculadora de Salario para
+              Publicidad
+            </p>
+          </div>
+          <div class="card-action red darken-1">
+            <a href="#" onclick="clickPubli()" style="color: white">Ir a Publicidad</a>
+          </div>
+        </div>
+        <div class="card" onclick="clickLargo()">
+          <div class="card-content">
+            <span class="card-title">Sección Largo</span>
+            <p>
+              En esta seccion vas a encontrar la calculadora para
+              Largometrajes
+            </p>
+          </div>
+          <div class="card-action red darken-1">
+            <a href="#" onclick="clickLargo()" style="color: white">Ir a Largo</a>
+          </div>
+        </div>
+
+        <div class="card" onclick="clickAbout()">
+          <div class="card-content">
+            <span class="card-title">Contacto</span>
+            <p>Aca podes dejar Mensajes y sugerencias</p>
+          </div>
+          <div class="card-action red darken-1">
+            <a href="#" onclick="clickAbout()" style="color: white">Ir a Contacto</a>
+          </div>
+        </div>
       </div>
-    </header>
-    <!-- sidenav -->
-    <ul class="sidenav" id="sidenavMobile">
-      <li>
-        <img class="responsive-img sidenavImage" src="assets/icon_iphone.png" />
-      </li>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickInicio()"
-          ><i class="material-icons">home</i>Inicio</a
-        >
-      </li>
-      <div class="divider"></div>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickPubli()"
-          ><i class="material-icons">camera</i>Publicidad</a
-        >
-      </li>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickLargo()"
-          ><i class="material-icons">movie</i>Largo</a
-        >
-      </li>
 
-      <div class="divider"></div>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickAbout()"
-          ><i class="material-icons">announcement</i>Contacto</a
-        >
-      </li>
-    </ul>
+      <!-- screen publicidad -->
+      <div class="section" id="screenPubli" style="display: none">
+        <div class="row modulo" id="inputUsuarioPubli">
+          <!--  formulario input publi -->
+          <form class="col s12" id="formIngresoPubli">
+            <!-- select -->
 
-    <!-- todo aca adentro!!!! -->
-    <main>
-      <div class="center">
-        <!-- secciones -->
-        <div class="section" id="screenInicio">
-          <div class="card" onclick="clickPubli()">
-            <div class="card-content">
-              <span class="card-title">Sección Publicidad</span>
-              <p>
-                En esta seccion podes usar la Calculadora de Salario para
-                Publicidad
-              </p>
+            <div class="input-field row">
+              <select class="browser-default" onchange="afterSelecPubli()" name="rolesPubli" id="rolesPubli">
+                <option value="" disabled="" selected="">
+                  Selecciona un Rol
+                </option>
+              </select>
             </div>
-            <div class="card-action red darken-1">
-              <a href="#" onclick="clickPubli()" style="color: white"
-                >Ir a Publicidad</a
-              >
-            </div>
-          </div>
-          <div class="card" onclick="clickLargo()">
-            <div class="card-content">
-              <span class="card-title">Sección Largo</span>
-              <p>
-                En esta seccion vas a encontrar la calculadora para
-                Largometrajes
-              </p>
-            </div>
-            <div class="card-action red darken-1">
-              <a href="#" onclick="clickLargo()" style="color: white"
-                >Ir a Largo</a
-              >
-            </div>
-          </div>
 
-          <div class="card" onclick="clickAbout()">
-            <div class="card-content">
-              <span class="card-title">Contacto</span>
-              <p>Aca podes dejar Mensajes y sugerencias</p>
-            </div>
-            <div class="card-action red darken-1">
-              <a href="#" onclick="clickAbout()" style="color: white"
-                >Ir a Contacto</a
-              >
-            </div>
-          </div>
-        </div>
+            <!--  display valores sica -->
 
-        <!-- screen publicidad -->
-        <div class="section" id="screenPubli" style="display: none">
-          <div class="row modulo" id="inputUsuarioPubli">
-            <!--  formulario input publi -->
-            <form class="col s12" id="formIngresoPubli">
-              <!-- select -->
+            <div class="modulo row" id="valoresSicaPubli" style="display: none">
+              <i class="material-icons right" onclick="cerrarModuloValoresPubli()" id="closeValoresSicaPubli">close</i>
 
-              <div class="input-field row">
-                <select
-                  class="browser-default"
-                  onchange="afterSelecPubli()"
-                  name="rolesPubli"
-                  id="rolesPubli"
-                >
-                  <option value="" disabled="" selected="">
-                    Selecciona un Rol
-                  </option>
-                </select>
+              <h6 class="center red-text text-darken-2" id="fechaActualPubli"></h6>
+              <div class="divider"></div>
+              <div class="switch center s12 m12">
+                <label>
+                  Escala Anterior
+                  <input type="checkbox" checked="checked" id="swEscalaPubli" />
+                  <!-- input disable type -->
+                  <span class="lever"></span>
+                  Escala Actual
+                </label>
+              </div>
+              <table class="striped">
+                <thead>
+                  <tr class="red-text text-darken-2">
+                    <th data-field="showValorJ8Publi">Jornada 8hs</th>
+                    <th data-field="showValorJ12Publi">Jornada 12hs</th>
+                    <th data-field="showValorXtraPubli">Hora Extra</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="showValorJ8Publi"></td>
+                    <td id="showValorJ12Publi"></td>
+                    <td id="showValorXtraPubli"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- input cantidades -->
+            <div class="row" id="inputCantidadesPubli">
+              <!-- cantidad  8hs -->
+              <div class="input-field col s12">
+                <input type="number" onchange="unBlockBtnPubli()" id="cantJ8Publi" class="validate" disabled="" />
+                <label for="cantJ8Publi">Jornadas de 8hs:</label>
               </div>
 
-              <!--  display valores sica -->
-
-              <div
-                class="modulo row"
-                id="valoresSicaPubli"
-                style="display: none"
-              >
-                <i
-                  class="material-icons right"
-                  onclick="cerrarModuloValoresPubli()"
-                  id="closeValoresSicaPubli"
-                  >close</i
-                >
-
-                <h6
-                  class="center red-text text-darken-2"
-                  id="fechaActualPubli"
-                ></h6>
-                <div class="divider"></div>
-                <div class="switch center s12 m12">
-                  <label>
-                    Escala Anterior
-                    <input
-                      type="checkbox"
-                      checked="checked"
-                      id="swEscalaPubli"
-                    />
-                    <!-- input disable type -->
-                    <span class="lever"></span>
-                    Escala Actual
-                  </label>
-                </div>
-                <table class="striped">
-                  <thead>
-                    <tr class="red-text text-darken-2">
-                      <th data-field="showValorJ8Publi">Jornada 8hs</th>
-                      <th data-field="showValorJ12Publi">Jornada 12hs</th>
-                      <th data-field="showValorXtraPubli">Hora Extra</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td id="showValorJ8Publi"></td>
-                      <td id="showValorJ12Publi"></td>
-                      <td id="showValorXtraPubli"></td>
-                    </tr>
-                  </tbody>
-                </table>
+              <!-- cantidad 12hs -->
+              <div class="input-field col s12">
+                <input type="number" onchange="unBlockBtnPubli()" id="cantJ12Publi" class="validate" disabled="" />
+                <label for="cantJ12Publi">Jornadas de 12hs:</label>
               </div>
 
-              <!-- input cantidades -->
-              <div class="row" id="inputCantidadesPubli">
-                <!-- cantidad  8hs -->
-                <div class="input-field col s12">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnPubli()"
-                    id="cantJ8Publi"
-                    class="validate"
-                    disabled=""
-                  />
-                  <label for="cantJ8Publi">Jornadas de 8hs:</label>
-                </div>
-
-                <!-- cantidad 12hs -->
-                <div class="input-field col s12">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnPubli()"
-                    id="cantJ12Publi"
-                    class="validate"
-                    disabled=""
-                  />
-                  <label for="cantJ12Publi">Jornadas de 12hs:</label>
-                </div>
-
-                <!-- cantidad extras publi -->
-                <div class="input-field col s12">
-                  <label
-                    for="cantExtraPubli"
-                    class="tooltipped"
-                    data-position="right"
-                    data-delay="50"
-                    data-tooltip="empiezan a correr a partir de la hora 12 de rodaje"
-                    >Horas Extras:</label
-                  >
-                  <input
-                    type="number"
-                    onchange="unBlockBtnPubli()"
-                    step="0.25"
-                    class="validate"
-                    id="cantExtraPubli"
-                    disabled=""
-                  />
-                </div>
-                <!-- cantidad extras200 publi -->
-                <div class="input-field col s12">
-                  <label
-                    for="cantExtra200Publi"
-                    class="tooltipped"
-                    data-position="right"
-                    data-delay="50"
-                    data-tooltip="empiezan a correr a partir de la hora 16 de rodaje"
-                    >Horas Extras al 200%:</label
-                  >
-                  <input
-                    type="number"
-                    onchange="unBlockBtnPubli()"
-                    step="0.25"
-                    class="validate"
-                    id="cantExtra200Publi"
-                  />
-                </div>
-                <!-- cantidad extras300 publi -->
-                <div class="input-field col s12">
-                  <label
-                    for="cantExtra300Publi"
-                    class="tooltipped"
-                    data-position="right"
-                    data-delay="50"
-                    data-tooltip="empiezan a correr a partir de la hora 18 de rodaje"
-                    >Horas Extras al 300%:</label
-                  >
-
-                  <input
-                    type="number"
-                    onchange="unBlockBtnPubli()"
-                    step="0.25"
-                    class="validate"
-                    id="cantExtra300Publi"
-                  />
-                </div>
-
-                <!-- checkbox afiliado -->
-                <div class="input-field col s12">
-                  <p>
-                    <label class="left">
-                      <input
-                        type="checkbox"
-                        class="filled-in"
-                        checked="checked"
-                        id="afiliadoPubli"
-                        disabled=""
-                      />
-                      <span>Afiliado</span>
-                    </label>
-                  </p>
-                </div>
-
-                <!-- botones calcular y reset -->
-                <div class="container col s12">
-                  <div class="center">
-                    <button
-                      class="btn activator"
-                      type="button"
-                      onclick="calculoPubli()"
-                      id="btnCalcPubli"
-                    >
-                      Calcular
-                    </button>
-                    <button
-                      class="btn red"
-                      onclick="botonResetPubli()"
-                      id="btnResetPubli"
-                    >
-                      Reset
-                    </button>
-                  </div>
-                </div>
+              <!-- cantidad extras publi -->
+              <div class="input-field col s12">
+                <label for="cantExtraPubli" class="tooltipped" data-position="right" data-delay="50"
+                  data-tooltip="empiezan a correr a partir de la hora 12 de rodaje">Horas Extras:</label>
+                <input type="number" onchange="unBlockBtnPubli()" step="0.25" class="validate" id="cantExtraPubli"
+                  disabled="" />
               </div>
-            </form>
-            <!-- fin formulario -->
-          </div>
+              <!-- cantidad extras200 publi -->
+              <div class="input-field col s12">
+                <label for="cantExtra200Publi" class="tooltipped" data-position="right" data-delay="50"
+                  data-tooltip="empiezan a correr a partir de la hora 16 de rodaje">Horas Extras al 200%:</label>
+                <input type="number" onchange="unBlockBtnPubli()" step="0.25" class="validate" id="cantExtra200Publi" />
+              </div>
+              <!-- cantidad extras300 publi -->
+              <div class="input-field col s12">
+                <label for="cantExtra300Publi" class="tooltipped" data-position="right" data-delay="50"
+                  data-tooltip="empiezan a correr a partir de la hora 18 de rodaje">Horas Extras al 300%:</label>
 
-          <!-- modulo totales publi -->
-          <div class="row modulo" id="totalesPubli" style="display: none">
-            <h3>Total</h3>
-
-            <table class="bordered">
-              <thead>
-                <tr>
-                  <th data-field="concepTotalPubli">Concepto</th>
-                  <th data-field="unidTotalPubli">unid</th>
-                  <th data-field="impTotalPubli">Importe</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Jornales 8hs</td>
-                  <td id="unidJ8Publi"></td>
-                  <td id="impJ8Publi" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Jornales 12hs</td>
-                  <td id="unidJ12Publi"></td>
-                  <td id="impJ12Publi" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Horas Extra</td>
-                  <td id="unidXtraPubli"></td>
-                  <td id="impXtraPubli" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Horas Extra 200%</td>
-                  <td id="unidXtra200Publi"></td>
-                  <td
-                    id="impXtra200Publi"
-                    class="green-text text-darken-1"
-                  ></td>
-                </tr>
-                <tr>
-                  <td>Horas Extra 300%</td>
-                  <td id="unidXtra300Publi"></td>
-                  <td
-                    id="impXtra300Publi"
-                    class="green-text text-darken-1"
-                  ></td>
-                </tr>
-                <tr>
-                  <td>SAC</td>
-                  <td id="unidSACPubli"></td>
-                  <td id="impSACPubli" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>VAC</td>
-                  <td id="unidVACPubli"></td>
-                  <td id="impVACPubli" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>SAC sobre VAC</td>
-                  <td id="unidSACSVACPubli"></td>
-                  <td
-                    id="impSACSVACPubli"
-                    class="green-text text-darken-1"
-                  ></td>
-                </tr>
-                <tr>
-                  <td>Descuentos*</td>
-                  <td id="unidDescPubli"></td>
-                  <td id="impDescPubli" class="red-text text-darken-3"></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="col s12 section">
-              <h6
-                class="green-text text-darken-1 right"
-                id="printTotalBrutoPubli"
-              ></h6>
-            </div>
-            <div class="col s12">
-              <h5
-                class="green-text text-darken-1 right"
-                id="printTotalNetoPubli"
-              ></h5>
-            </div>
-
-            <div class="marging">
-              <button
-                class="btn right"
-                onclick="botonResetPubli()"
-                id="btnResetPubli"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- fin screen Publi -->
-
-        <!-- screen Largo -->
-        <div class="section" id="screenLargo" style="display: none">
-          <div class="row modulo" id="inputUsuarioLargo">
-            <!--  formulario input Largo -->
-            <form class="s12" id="formIngresoLargo">
-              <!-- select -->
-
-              <div class="input-field row">
-                <select
-                  class="browser-default"
-                  onchange="afterSelecLargo()"
-                  name="rolesLargo"
-                  id="rolesLargo"
-                >
-                  <option value="" disabled="" selected="">
-                    Selecciona un Rol
-                  </option>
-                </select>
+                <input type="number" onchange="unBlockBtnPubli()" step="0.25" class="validate" id="cantExtra300Publi" />
               </div>
 
-              <!--  display valores sica -->
-
-              <div class="modulo" id="valoresSicaLargo" style="display: none">
-                <i
-                  class="material-icons right"
-                  onclick="cerrarModuloValoresLargo()"
-                  id="closeValoresSicaLargo"
-                  >close</i
-                >
-
-                <h6
-                  class="center red-text text-darken-2"
-                  id="fechaActualLargo"
-                ></h6>
-                <div class="divider"></div>
-                <div class="switch center s12 m12">
-                  <label>
-                    Escala Anterior
-                    <input
-                      type="checkbox"
-                      checked="checked"
-                      id="swEscalaLargo"
-                    />
-                    <!-- input disable type -->
-                    <span class="lever"></span>
-                    Escala Actual
-                  </label>
-                </div>
-                <table class="striped">
-                  <thead>
-                    <tr class="red-text text-darken-2">
-                      <th
-                        data-field="showValorSemanalLargo"
-                        id="semanaORefuerzo"
-                      >
-                        Valor por Semana
-                      </th>
-
-                      <th data-field="showValorXtraLargo">Hora Extra</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td id="showValorSemanalLargo"></td>
-
-                      <td id="showValorXtraLargo"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- input cantidades Largo -->
-              <div class="row marging" id="inputCantidadesLargo">
-                <div class="switch col s12 m12 center">
+              <!-- checkbox afiliado -->
+              <div class="input-field col s12">
+                <p>
                   <label class="left">
-                    Refuerzo
-                    <input
-                      disabled
-                      type="checkbox"
-                      checked="checked"
-                      onchange="opcionRefuerzo()"
-                      id="switchLargoMode"
-                    />
-                    <!-- input disable type -->
-                    <span class="lever"></span>
-                    Semanal
+                    <input type="checkbox" class="filled-in" checked="checked" id="afiliadoPubli" disabled="" />
+                    <span>Afiliado</span>
                   </label>
-                </div>
-                <div class="input-field col s12">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnLargo()"
-                    id="cantSemanasLargo"
-                    class="validate"
-                    disabled
-                  />
-                  <label
-                    for="cantSemanasLargo"
-                    id="cambiarTxtModoLargo"
-                    class="active"
-                    >Cantidad de Semanas:</label
-                  >
-                </div>
-                <div class="input-field col s6">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnLargo()"
-                    class="validate"
-                    id="cantSabLargo"
-                    disabled
-                  />
-                  <label for="cantSabLargo" class="active">Sabados:</label>
-                </div>
-                <div class="input-field col s6">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnLargo()"
-                    class="validate"
-                    id="cantDomLargo"
-                    disabled
-                  />
-                  <label for="cantDomLargo" class="active">Domingos:</label>
-                </div>
-                <div class="input-field col s6 m6">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnLargo()"
-                    step="0.25"
-                    id="cantXtra50Largo"
-                    class="validate"
-                    disabled
-                  />
-                  <label for="cantXtra50Largo" class="active"
-                    >Horas Extra 50%:</label
-                  >
-                </div>
-                <div class="input-field col s6 m6">
-                  <input
-                    type="number"
-                    onchange="unBlockBtnLargo()"
-                    step="0.25"
-                    id="cantXtra100Largo"
-                    class="validate"
-                    disabled
-                  />
-                  <label for="cantXtra100Largo" class="active"
-                    >Horas Extra 100%:</label
-                  >
-                </div>
+                </p>
+              </div>
 
-                <div class="input-field col s6">
-                  <p>
-                    <label class="left">
-                      <input
-                        type="checkbox"
-                        class="filled-in"
-                        checked="checked"
-                        id="afiliadoLargo"
-                        disabled
-                      />
-                      <span>Afiliado</span>
-                    </label>
-                  </p>
-                </div>
-                <div class="input-field col s6">
-                  <p>
-                    <label class="left">
-                      <input
-                        type="checkbox"
-                        class="filled-in"
-                        checked="checked"
-                        id="calcSacVacLargo"
-                        disabled
-                      />
-                      <span>Sac/Vac</span>
-                    </label>
-                  </p>
-                </div>
-
-                <!-- botones calcular y reset -->
-                <div class="container col s12">
-                  <div class="center">
-                    <button
-                      class="btn activator"
-                      type="button"
-                      onclick="calculoLargo()"
-                      id="btnCalcLargo"
-                    >
-                      Calcular
-                    </button>
-                    <button
-                      class="btn red"
-                      onclick="botonResetLargo()"
-                      id="btnResetLargo"
-                    >
-                      Reset
-                    </button>
-                  </div>
+              <!-- botones calcular y reset -->
+              <div class="container col s12">
+                <div class="center">
+                  <button class="btn activator" type="button" onclick="calculoPubli()" id="btnCalcPubli">
+                    Calcular
+                  </button>
+                  <button class="btn red" onclick="botonResetPubli()" id="btnResetPubli">
+                    Reset
+                  </button>
                 </div>
               </div>
-            </form>
-            <!-- fin formulario -->
-          </div>
-
-          <!-- modulo totales Largo-->
-          <div class="row modulo" id="totalesLargo" style="display: none">
-            <h3 class="left-align">Total</h3>
-            <table class="bordered">
-              <thead>
-                <tr>
-                  <th data-field="concepTotalLargo">Concepto</th>
-                  <th data-field="unidTotalLargo">unid</th>
-                  <th data-field="impTotalLargo">Importe</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="semanaORefuerzoLargo">Semanas</td>
-                  <td id="unidSemLargo"></td>
-                  <td id="impSemLargo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Sabados</td>
-                  <td id="unidSabLargo"></td>
-                  <td id="impSabLargo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Domingos</td>
-                  <td id="unidDomLargo"></td>
-                  <td id="impDomLargo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Hs Extra al 50%</td>
-                  <td id="unidXtra50Largo"></td>
-                  <td id="impXtra50Largo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Hs Extra al 50%</td>
-                  <td id="unidXtra100Largo"></td>
-                  <td
-                    id="impXtra100Largo"
-                    class="green-text text-darken-1"
-                  ></td>
-                </tr>
-                <tr>
-                  <td>SAC</td>
-                  <td id="unidSACLargo"></td>
-                  <td id="impSACLargo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>VAC</td>
-                  <td id="unidVACLargo"></td>
-                  <td id="impVACLargo" class="green-text text-darken-1"></td>
-                </tr>
-                <tr>
-                  <td>Descuentos*</td>
-                  <td id="unidDescLargo"></td>
-                  <td id="impDescLargo" class="red-text text-darken-3"></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="col s12 section">
-              <h6
-                class="green-text text-darken-1 right"
-                id="printTotalBrutoLargo"
-              ></h6>
             </div>
-            <div class="col s12">
-              <h5
-                class="green-text text-darken-1 right"
-                id="printTotalNetoLargo"
-              ></h5>
-            </div>
-
-            <div class="marging">
-              <button
-                class="btn right"
-                onclick="botonResetLargo()"
-                id="btnResetLargo"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
+          </form>
+          <!-- fin formulario -->
         </div>
-        <!-- fin screen Largo -->
-        <!-- Screen contacto -->
-        <div class="section" id="screenAbout" style="display: none">
-          <div class="row" id="colaborar">
-            <div class="modulo col s12 marging">
-              <h5>¿Queres Colaborar?</h5>
-              <!--poner titulo-->
-              <p class="container">
-                <!-- texto -->
-                Hola, soy el creador de la aplicación Bolo Calculaste, espero
-                que la estés encontrando útil. Mantener la aplicación en línea y
-                actualizada es un trabajo constante, y dependemos de la
-                generosidad de nuestros usuarios para poder hacerlo. Si te ha
-                gustado la aplicación y te ha sido útil, te pido que consideres
-                hacer una donación a través de nuestra página en Cafecito o Buy
-                Me A Coffee. Cada pequeña contribución es una gran ayuda para
-                nosotros, y nos permite seguir mejorando la aplicación y
-                manteniendo actualizados los valores salariales para la
-                comunidad de trabajadores de la industria cinematográfica
-                argentina. Si tienes alguna sugerencia, comentario o duda, por
-                favor déjalo en el siguiente formulario. ¡Gracias por tu apoyo y
-                por ayudarnos a mantener Bolo Calculaste en línea! Tu
-                contribución es esencial para seguir mejorando la aplicación y
-                brindar un mejor servicio a la comunidad de trabajadores de la
-                industria cinematográfica argentina.
-              </p>
 
-              <div class="col s12 marging">
-                <a
-                  href="
-                         https://cafecito.app/bolocalculaste
-                          "
-                  target="_blank"
-                  class="marging btn"
-                  >Invitame un Cafecito</a
-                >
+        <!-- modulo totales publi -->
+        <div class="row modulo" id="totalesPubli" style="display: none">
+          <h3>Total</h3>
 
-                <a
-                  href="https://www.buymeacoffee.com/Bolocalculaste"
-                  target="_blank"
-                  class="btn"
-                  >Buy Me a coffee</a
-                >
-              </div>
-            </div>
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th data-field="concepTotalPubli">Concepto</th>
+                <th data-field="unidTotalPubli">unid</th>
+                <th data-field="impTotalPubli">Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jornales 8hs</td>
+                <td id="unidJ8Publi"></td>
+                <td id="impJ8Publi" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Jornales 12hs</td>
+                <td id="unidJ12Publi"></td>
+                <td id="impJ12Publi" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Horas Extra</td>
+                <td id="unidXtraPubli"></td>
+                <td id="impXtraPubli" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Horas Extra 200%</td>
+                <td id="unidXtra200Publi"></td>
+                <td id="impXtra200Publi" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Horas Extra 300%</td>
+                <td id="unidXtra300Publi"></td>
+                <td id="impXtra300Publi" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>SAC</td>
+                <td id="unidSACPubli"></td>
+                <td id="impSACPubli" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>VAC</td>
+                <td id="unidVACPubli"></td>
+                <td id="impVACPubli" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>SAC sobre VAC</td>
+                <td id="unidSACSVACPubli"></td>
+                <td id="impSACSVACPubli" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Descuentos*</td>
+                <td id="unidDescPubli"></td>
+                <td id="impDescPubli" class="red-text text-darken-3"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col s12 section">
+            <h6 class="green-text text-darken-1 right" id="printTotalBrutoPubli"></h6>
+          </div>
+          <div class="col s12">
+            <h5 class="green-text text-darken-1 right" id="printTotalNetoPubli"></h5>
           </div>
 
-          <div class="row modulo col s12" id="contacto" style="display: flex">
-            <section class="col s12">
-              <div class="row">
-                <h4 class="center-align">Contacto</h4>
-                <article class="">
-                  <form method="POST" action="php/enviar.php">
-                    <div class="input-field">
-                      <i class="material-icons prefix">perm_identity</i>
-                      <label for="nombre">Nombre</label>
-                      <input type="text" id="nombre" name="nombre" required />
-                    </div>
-
-                    <div class="input-field">
-                      <i class="material-icons prefix">email</i>
-                      <label for="email">Email</label>
-                      <input type="email" id="correo" name="correo" required />
-                    </div>
-                    <div class="input-field" style="display: none">
-                      <i class="material-icons prefix">account_circle</i>
-                      <label for="text">Subject</label>
-                      <input type="text" id="subject" name="subject" />
-                    </div>
-
-                    <div class="input-field">
-                      <i class="material-icons prefix">mode_edit</i>
-                      <label for="mensaje">Mensaje</label>
-                      <textarea
-                        name="mensaje"
-                        id="mensaje"
-                        rows="10"
-                        class="materialize-textarea"
-                        length="300"
-                        required
-                      ></textarea>
-                    </div>
-
-                    <p class="center-align">
-                      <button
-                        class="waves-effect waves-light btn"
-                        type="submit"
-                        id="enviarMensaje"
-                      >
-                        <i class="material-icons right">send</i>enviar
-                      </button>
-                    </p>
-                  </form>
-                </article>
-              </div>
-            </section>
-          </div>
-        </div>
-        <!-- fin Screen About -->
-
-        <!-- help -->
-        <div class="row" id="screenHelp">
-          <!-- Modal Structure -->
-          <div id="modalPubli" class="modal">
-            <div class="modal-content">
-              <div class="col">
-                <h5 id="tituloHelp"></h5>
-                <div class="col" id="idImagenesHelp"></div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <a
-                href="#"
-                class="modal-action modal-close waves-effect waves-green btn-flat"
-                >ok</a
-              >
-            </div>
+          <div class="marging">
+            <button class="btn right" onclick="botonResetPubli()" id="btnResetPubli">
+              Cerrar
+            </button>
           </div>
         </div>
       </div>
-    </main>
+      <!-- fin screen Publi -->
 
-    <footer class="page-footer red" id="footer">
-      <div class="">
+      <!-- screen Largo -->
+      <div class="section" id="screenLargo" style="display: none">
+        <div class="row modulo" id="inputUsuarioLargo">
+          <!--  formulario input Largo -->
+          <form class="s12" id="formIngresoLargo">
+            <!-- select -->
+
+            <div class="input-field row">
+              <select class="browser-default" onchange="afterSelecLargo()" name="rolesLargo" id="rolesLargo">
+                <option value="" disabled="" selected="">
+                  Selecciona un Rol
+                </option>
+              </select>
+            </div>
+
+            <!--  display valores sica -->
+
+            <div class="modulo" id="valoresSicaLargo" style="display: none">
+              <i class="material-icons right" onclick="cerrarModuloValoresLargo()" id="closeValoresSicaLargo">close</i>
+
+              <h6 class="center red-text text-darken-2" id="fechaActualLargo"></h6>
+              <div class="divider"></div>
+              <div class="switch center s12 m12">
+                <label>
+                  Escala Anterior
+                  <input type="checkbox" checked="checked" id="swEscalaLargo" />
+                  <!-- input disable type -->
+                  <span class="lever"></span>
+                  Escala Actual
+                </label>
+              </div>
+              <table class="striped">
+                <thead>
+                  <tr class="red-text text-darken-2">
+                    <th data-field="showValorSemanalLargo" id="semanaORefuerzo">
+                      Valor por Semana
+                    </th>
+
+                    <th data-field="showValorXtraLargo">Hora Extra</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="showValorSemanalLargo"></td>
+
+                    <td id="showValorXtraLargo"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- input cantidades Largo -->
+            <div class="row marging" id="inputCantidadesLargo">
+              <div class="switch col s12 m12 center">
+                <label class="left">
+                  Refuerzo
+                  <input disabled type="checkbox" checked="checked" onchange="opcionRefuerzo()" id="switchLargoMode" />
+                  <!-- input disable type -->
+                  <span class="lever"></span>
+                  Semanal
+                </label>
+              </div>
+              <div class="input-field col s12">
+                <input type="number" onchange="unBlockBtnLargo()" id="cantSemanasLargo" class="validate" disabled />
+                <label for="cantSemanasLargo" id="cambiarTxtModoLargo" class="active">Cantidad de Semanas:</label>
+              </div>
+              <div class="input-field col s6">
+                <input type="number" onchange="unBlockBtnLargo()" class="validate" id="cantSabLargo" disabled />
+                <label for="cantSabLargo" class="active">Sabados:</label>
+              </div>
+              <div class="input-field col s6">
+                <input type="number" onchange="unBlockBtnLargo()" class="validate" id="cantDomLargo" disabled />
+                <label for="cantDomLargo" class="active">Domingos:</label>
+              </div>
+              <div class="input-field col s6 m6">
+                <input type="number" onchange="unBlockBtnLargo()" step="0.25" id="cantXtra50Largo" class="validate"
+                  disabled />
+                <label for="cantXtra50Largo" class="active">Horas Extra 50%:</label>
+              </div>
+              <div class="input-field col s6 m6">
+                <input type="number" onchange="unBlockBtnLargo()" step="0.25" id="cantXtra100Largo" class="validate"
+                  disabled />
+                <label for="cantXtra100Largo" class="active">Horas Extra 100%:</label>
+              </div>
+
+              <div class="input-field col s6">
+                <p>
+                  <label class="left">
+                    <input type="checkbox" class="filled-in" checked="checked" id="afiliadoLargo" disabled />
+                    <span>Afiliado</span>
+                  </label>
+                </p>
+              </div>
+              <div class="input-field col s6">
+                <p>
+                  <label class="left">
+                    <input type="checkbox" class="filled-in" checked="checked" id="calcSacVacLargo" disabled />
+                    <span>Sac/Vac</span>
+                  </label>
+                </p>
+              </div>
+
+              <!-- botones calcular y reset -->
+              <div class="container col s12">
+                <div class="center">
+                  <button class="btn activator" type="button" onclick="calculoLargo()" id="btnCalcLargo">
+                    Calcular
+                  </button>
+                  <button class="btn red" onclick="botonResetLargo()" id="btnResetLargo">
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- fin formulario -->
+        </div>
+
+        <!-- modulo totales Largo-->
+        <div class="row modulo" id="totalesLargo" style="display: none">
+          <h3 class="left-align">Total</h3>
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th data-field="concepTotalLargo">Concepto</th>
+                <th data-field="unidTotalLargo">unid</th>
+                <th data-field="impTotalLargo">Importe</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="semanaORefuerzoLargo">Semanas</td>
+                <td id="unidSemLargo"></td>
+                <td id="impSemLargo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Sabados</td>
+                <td id="unidSabLargo"></td>
+                <td id="impSabLargo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Domingos</td>
+                <td id="unidDomLargo"></td>
+                <td id="impDomLargo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Hs Extra al 50%</td>
+                <td id="unidXtra50Largo"></td>
+                <td id="impXtra50Largo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Hs Extra al 50%</td>
+                <td id="unidXtra100Largo"></td>
+                <td id="impXtra100Largo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>SAC</td>
+                <td id="unidSACLargo"></td>
+                <td id="impSACLargo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>VAC</td>
+                <td id="unidVACLargo"></td>
+                <td id="impVACLargo" class="green-text text-darken-1"></td>
+              </tr>
+              <tr>
+                <td>Descuentos*</td>
+                <td id="unidDescLargo"></td>
+                <td id="impDescLargo" class="red-text text-darken-3"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="col s12 section">
+            <h6 class="green-text text-darken-1 right" id="printTotalBrutoLargo"></h6>
+          </div>
+          <div class="col s12">
+            <h5 class="green-text text-darken-1 right" id="printTotalNetoLargo"></h5>
+          </div>
+
+          <div class="marging">
+            <button class="btn right" onclick="botonResetLargo()" id="btnResetLargo">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- fin screen Largo -->
+      <!-- Screen contacto -->
+      <div class="section" id="screenAbout" style="display: none">
         <div class="row" id="colaborar">
-          <div class="center col s12 marging">
-            <h6>¿Queres Colaborar?</h6>
-
+          <div class="modulo col s12 marging">
+            <h5>¿Queres Colaborar?</h5>
+            <!--poner titulo-->
             <p class="container">
-              ¿Te ha resultado útil la aplicación Bolo Calculaste? Ayúdame a
-              mantenerla en línea y actualizada haciendo una donación. ¡Tu
-              generosidad nos ayuda a seguir mejorando la aplicación para la
+              <!-- texto -->
+              Hola, soy el creador de la aplicación Bolo Calculaste, espero
+              que la estés encontrando útil. Mantener la aplicación en línea y
+              actualizada es un trabajo constante, y dependemos de la
+              generosidad de nuestros usuarios para poder hacerlo. Si te ha
+              gustado la aplicación y te ha sido útil, te pido que consideres
+              hacer una donación a través de nuestra página en Cafecito o Buy
+              Me A Coffee. Cada pequeña contribución es una gran ayuda para
+              nosotros, y nos permite seguir mejorando la aplicación y
+              manteniendo actualizados los valores salariales para la
               comunidad de trabajadores de la industria cinematográfica
-              argentina!
+              argentina. Si tienes alguna sugerencia, comentario o duda, por
+              favor déjalo en el siguiente formulario. ¡Gracias por tu apoyo y
+              por ayudarnos a mantener Bolo Calculaste en línea! Tu
+              contribución es esencial para seguir mejorando la aplicación y
+              brindar un mejor servicio a la comunidad de trabajadores de la
+              industria cinematográfica argentina.
             </p>
 
-            <a
-              href="
-                       https://cafecito.app/bolocalculaste
-                        "
-              target="_blank"
-              class="marging btn"
-              >Invitame un Cafecito</a
-            >
+            <div class="col s12 marging">
+              <a href="
+                         https://cafecito.app/bolocalculaste
+                          " target="_blank" class="marging btn">Invitame un Cafecito</a>
 
-            <a
-              href="https://www.buymeacoffee.com/Bolocalculaste"
-              target="_blank"
-              class="btn"
-              >Buy Me a coffee</a
-            >
-            <div class="col s12 marging"></div>
+              <a href="https://www.buymeacoffee.com/Bolocalculaste" target="_blank" class="btn">Buy Me a coffee</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row modulo col s12" id="contacto" style="display: flex">
+          <section class="col s12">
+            <div class="row">
+              <h4 class="center-align">Contacto</h4>
+              <article class="">
+                <form method="POST" action="php/enviar.php">
+                  <div class="input-field">
+                    <i class="material-icons prefix">perm_identity</i>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required />
+                  </div>
+
+                  <div class="input-field">
+                    <i class="material-icons prefix">email</i>
+                    <label for="email">Email</label>
+                    <input type="email" id="correo" name="correo" required />
+                  </div>
+                  <div class="input-field" style="display: none">
+                    <i class="material-icons prefix">account_circle</i>
+                    <label for="text">Subject</label>
+                    <input type="text" id="subject" name="subject" />
+                  </div>
+
+                  <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <label for="mensaje">Mensaje</label>
+                    <textarea name="mensaje" id="mensaje" rows="10" class="materialize-textarea" length="300"
+                      required></textarea>
+                  </div>
+
+                  <p class="center-align">
+                    <button class="waves-effect waves-light btn" type="submit" id="enviarMensaje">
+                      <i class="material-icons right">send</i>enviar
+                    </button>
+                  </p>
+                </form>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- fin Screen About -->
+
+      <!-- help -->
+      <div class="row" id="screenHelp">
+        <!-- Modal Structure -->
+        <div id="modalPubli" class="modal">
+          <div class="modal-content">
+            <div class="col">
+              <h5 id="tituloHelp"></h5>
+              <div class="col" id="idImagenesHelp"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">ok</a>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </main>
 
-    <!-- scripts -->
-    <script src="js/navegacion.js"></script>
-    <script src="js/inicializar_v2.js"></script>
-    <script src="js/publiAgo2023v2.js"></script>
-    <script src="js/about.js"></script>
-    <script src="js/largoAgo2023v2.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
+  <footer class="page-footer red" id="footer">
+    <div class="">
+      <div class="row" id="colaborar">
+        <div class="center col s12 marging">
+          <h6>¿Queres Colaborar?</h6>
+
+          <p class="container">
+            ¿Te ha resultado útil la aplicación Bolo Calculaste? Ayúdame a
+            mantenerla en línea y actualizada haciendo una donación. ¡Tu
+            generosidad nos ayuda a seguir mejorando la aplicación para la
+            comunidad de trabajadores de la industria cinematográfica
+            argentina!
+          </p>
+
+          <a href="
+                       https://cafecito.app/bolocalculaste
+                        " target="_blank" class="marging btn">Invitame un Cafecito</a>
+
+          <a href="https://www.buymeacoffee.com/Bolocalculaste" target="_blank" class="btn">Buy Me a coffee</a>
+          <div class="col s12 marging"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- scripts -->
+  <script src="js/navegacion.js"></script>
+  <script src="js/inicializar_v2.js"></script>
+  <script src="js/publiOct2023.js"></script>
+  <script src="js/about.js"></script>
+  <script src="js/largoOct2023.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
 </html>
