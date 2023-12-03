@@ -1,0 +1,11 @@
+{
+  "name": "bolocalculaste",
+  "version": "1.0.0",
+  "description": "¡Hola! Soy Bolo Calculaste, la herramienta perfecta para los trabajadores de la industria cinematográfica argentina que desean calcular su salario de manera rápida y sencilla.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
