@@ -1,232 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="manifest" href="manifest.json" />
-    <title>Bolo Calculaste?</title>
-    <!-- Iconos -->
-    <link
-      rel="icon"
-      href="assets/bolo2favicon32px.png"
-      type="image/png"
-      sizes="32x32"
-    />
-    <!-- PARA LOS MODELOS MAS RECIENTES DE IPAD Y IPHONE -->
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="assets/icon_iphone.png"
-      type="image/png"
-      sizes="152x152"
-    />
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="assets/icon_iphone.png"
-      type="image/png"
-      sizes="120x120"
-    />
-    <!-- Estilos -->
-    <link rel="stylesheet" href="css/estilos_v2.css" />
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <!--Import Google Icon Font-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="manifest" href="/manifest.json" />
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- moment.js manejar fechas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
 
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="Last-Modified" content="0" />
-    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-  </head>
-  <body>
-    <header>
-      <!-- Navbar responsivo -->
-      <div class="navbar-fixed">
-        <nav class="nav-extended">
-          <div class="nav-wrapper red darken-3">
-            <a
-              href="#"
-              data-target="sidenavMobile"
-              class="sidenav-trigger show-on-large"
-              ><i class="material-icons">menu</i></a
-            >
-            <a href="#" class="brand-logo" id="currentScreen">Calculo Horas</a>
-            <div>
-              <i
-                class="material-icons right modal-trigger"
-                href="#modalPubli"
-                id="help"
-                onclick="help()"
-                style="margin-right: 1em; display: none"
-                >help_outline</i
-              >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Bolo Calculaste?</title>
+  <!-- Iconos -->
+  <link rel="icon" href="assets/bolo2favicon32px.png" type="image/png" sizes="32x32" />
+  <!-- PARA LOS MODELOS MAS RECIENTES DE IPAD Y IPHONE -->
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="152x152" />
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="120x120" />
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos_v2.css" />
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- moment.js manejar fechas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Last-Modified" content="0" />
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+</head>
+
+<body>
+  <header>
+    <!-- Navbar responsivo -->
+    <div class="navbar-fixed">
+      <nav class="nav-extended">
+        <div class="nav-wrapper red darken-3">
+          <a href="#" data-target="sidenavMobile" class="sidenav-trigger show-on-large"><i
+              class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo" id="currentScreen">Calculo Horas</a>
+          <div>
+            <i class="material-icons right modal-trigger" href="#modalPubli" id="help" onclick="help()"
+              style="margin-right: 1em; display: none">help_outline</i>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- sidenav -->
+  <ul class="sidenav" id="sidenavMobile">
+    <li>
+      <img class="responsive-img sidenavImage" src="assets/icon_iphone.png" />
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickInicio()"><i class="material-icons">home</i>Inicio</a>
+    </li>
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickPubli()"><i class="material-icons">camera</i>Publicidad</a>
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickLargo()"><i class="material-icons">movie</i>Largo</a>
+    </li>
+
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickAbout()"><i class="material-icons">announcement</i>Contacto</a>
+    </li>
+  </ul>
+  <main>
+    <div class="center">
+      <div class="section" id="seccionCalculoHoras">
+        <!-- modulo Horas Publi -->
+        <div class="modulo mb10 mt20 container" id="seccionHorasPubli" style="display: block">
+          <div class="row">
+            <div class="col s12 mt10">
+              <span class="flow-text">ingrese los datos de la jornada</span>
             </div>
           </div>
-        </nav>
-      </div>
-    </header>
-    <!-- sidenav -->
-    <ul class="sidenav" id="sidenavMobile">
-      <li>
-        <img class="responsive-img sidenavImage" src="assets/icon_iphone.png" />
-      </li>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickInicio()"
-          ><i class="material-icons">home</i>Inicio</a
-        >
-      </li>
-      <div class="divider"></div>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickPubli()"
-          ><i class="material-icons">camera</i>Publicidad</a
-        >
-      </li>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickLargo()"
-          ><i class="material-icons">movie</i>Largo</a
-        >
-      </li>
+          <div class="" id="inputUsuarioHorasPubli">
+            <form class="col s12" id="formIngresoHorasPubli">
+              <!-- input datos de la jornada -->
+              <div class="row" id="inputJorHorariosPubli">
+                <div class="col s12" id="ingresarDatosPubli">
+                  
+      
 
-      <div class="divider"></div>
-      <li>
-        <a href="#" class="sidenav-close" onclick="clickAbout()"
-          ><i class="material-icons">announcement</i>Contacto</a
-        >
-      </li>
-    </ul>
-    <main>
-      <div class="center">
-        <div class="section" id="seccionCalculoHoras">
-          <!-- modulo Horas Publi -->
-          <div
-            class="modulo mb10 mt20"
-            id="seccionHorasPubli"
-            style="display: block"
-          >
-            <div class="row">
-              <div class="col s12 mt10">
-                <span class="flow-text">ingrese los datos de la jornada</span>
-              </div>
-            </div>
-            <div class="" id="inputUsuarioHorasPubli">
-              <form class="col s12" id="formIngresoHorasPubli">
-                <!-- input datos de la jornada -->
-                <div class="row" id="inputJorHorariosPubli">
-                  <div class="col s12" id="ingresarDatosPubli">
+                    <!-- <div class="row input-field">
+                    <div class="switch col s12" id="selectorTipoJornadaPubli">
+                      <label class="mb10">
+                        <span id="swJ8"> Jornada de 8hs </span>
+                        <input type="checkbox" id="swTipoJornada" checked />
+                        <span class="lever"></span>
+                        <span class="negrita" id="swJ12">Jornada de 12hs</span>
+                      </label>
+                      <div class="divider mt10"></div>
+                    </div> -->
+
                     <div class="row input-field">
-                      <div class="switch col s12" id="selectorTipoJornadaPubli">
-                        <label class="mb10">
+                      <div class="col s6">
+                        <label for="swJ8" class="mb10">
+                          <input type="radio" name="swTipoJornada" id="swJ8"/>
                           <span id="swJ8"> Jornada de 8hs </span>
-                          <input type="checkbox" id="swTipoJornada" checked />
-                          <span class="lever"></span>
-                          <span class="negrita" id="swJ12">
-                            Jornada de 12hs
-                          </span>
                         </label>
-                        <div class="divider mt10"></div>
                       </div>
-                    </div>
-
-                    <!-- Inicio Jornada -->
-
-                    <div class="col s12 l6">
-                      <label class="left" for="fechaInPubli"
-                        >Fecha Inicio</label
-                      >
-                      <input
-                        type="datetime-local"
-                        id="fechaInPubli"
-                        class="no-autoinit"
-                        name="fechaInPubli"
-                        required
-                      />
-                    </div>
-
-                    <!-- Fecha de Salida -->
-                    <div class="col s12 l6">
-                      <label class="left" for="fechaOutPubli"
-                        >Fecha final</label
-                      >
-                      <input
-                        type="datetime-local"
-                        class="no-autoinit"
-                        id="fechaOutPubli"
-                        required
-                      />
-                    </div>
-
-                    <!-- checkbox Penalty -->
-                    <div class="input-field col s6">
-                      <p>
-                        <label class="right">
-                          <input
-                            type="checkbox"
-                            class="filled-in"
-                            id="penaltyPubli"
-                          />
-                          <span>Penalty</span>
+                      <div class="col s6">
+                        <label for="swJ12" class="mb10">
+                          <input type="radio" name="swTipoJornada" id="swJ12">
+                          <span id="swJ12">Jornada de 12hs</span>
                         </label>
-                      </p>
+                      </div>
+
                     </div>
-                    <div class="col s6">
-                      <label class="left" for="duracionPenaltyPubli"
-                        >duracion del Penalty:</label
-                      >
-                      <input
-                        type="time"
-                        id="duracionPenaltyPubli"
-                        name="duracionPenaltyPubli"
-                        value="00:00"
-                      />
-                    </div>
+                  
+                  <!-- Inicio Jornada -->
+
+                  <div class="col s12 l6">
+                    <label class="left" for="fechaInPubli">Fecha Inicio</label>
+                    <input type="datetime-local" id="fechaInPubli" class="no-autoinit" name="fechaInPubli" required />
                   </div>
-                  <!-- boton guardar dia -->
-                  <div class="container col s12">
-                    <div class="center">
-                      <button
-                        class="btn-small"
-                        type="button"
-                        id="btnGuardarDiaPubli"
-                        disabled
-                      >
-                        Guardar
-                      </button>
-                    </div>
+
+                  <!-- Fecha de Salida -->
+                  <div class="col s12 l6">
+                    <label class="left" for="fechaOutPubli">Fecha final</label>
+                    <input type="datetime-local" class="no-autoinit" id="fechaOutPubli" required />
+                  </div>
+
+                  <!-- checkbox Penalty -->
+                  <div class="input-field col s6">
+                    <p>
+                      <label class="right">
+                        <input type="checkbox" class="filled-in" id="penaltyPubli" />
+                        <span>Penalty</span>
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s6">
+                    <label class="left" for="duracionPenaltyPubli">duracion del Penalty:</label>
+                    <input type="time" id="duracionPenaltyPubli" name="duracionPenaltyPubli" value="00:00" />
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
-          <div class="modulo" id="modCierrePubli" style="display: none">
-            <div class="row">
-              <div class="col s12" id="resultadoCierrePubli">
-                <ul id="resultadocierrePubli"></ul>
+                <!-- boton guardar dia -->
+                <div class="container col s12">
+                  <div class="center">
+                    <button class="btn-small" type="button" id="btnGuardarDiaPubli" disabled>
+                      Guardar
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col s12">
-              <button class="btn red waves" id="btnVolver">volver</button>
+            </form>
+          </div>
+        </div>
+        <div class="modulo" id="modCierrePubli" style="display: none">
+          <div class="row">
+            <div class="col s12" id="resultadoCierrePubli">
+              <ul id="resultadocierrePubli"></ul>
             </div>
           </div>
-          <div class="" id="moduloJorGuardadas" style="display: none">
-            <div class="row">
-              <div class="col s3"></div>
-              <div class="col s6"><h5>Jornadas</h5></div>
-              <div class="col s3"></div>
+          <div class="col s12">
+            <button class="btn red waves" id="btnVolver">volver</button>
+          </div>
+        </div>
+        <div class="" id="moduloJorGuardadas" style="display: none">
+          <div class="row">
+            <div class="col s3"></div>
+            <div class="col s6">
+              <h5>Jornadas</h5>
             </div>
-            <div class="row" id="moduloDiasPubli">
-              <ul class="collection" id="listaDiasPubli"></ul>
-            </div>
-            <!-- modelo de lista
+            <div class="col s3"></div>
+          </div>
+          <div class="row" id="moduloDiasPubli">
+            <ul class="collection" id="listaDiasPubli"></ul>
+          </div>
+          <!-- modelo de lista
             <div class="row">
               <ul class="collection">
                 <li class="collection-item left-align">
@@ -268,46 +214,41 @@
                 </li>
               </ul>
             </div> -->
-          </div>
-        </div>
-
-        <div class="footerHoras">
-          <a class="btn s6" id="btnSumarDia" style="display: none"
-            >Agregar Dia</a
-          >
-          <button
-            class="btn s6 right"
-            type="button"
-            id="botonCierrePubli"
-            style="display: none"
-          >
-            Calcular Cierre
-          </button>
         </div>
       </div>
-    </main>
 
-    <script src="js/horasPubli.js"></script>
-    <script src="js/navegacionHoras.js"></script>
+      <div class="footerHoras">
+        <a class="btn s6" id="btnSumarDia" style="display: none">Agregar Dia</a>
+        <button class="btn s6 right" type="button" id="botonCierrePubli" style="display: none">
+          Calcular Cierre
+        </button>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/horasPubli_v2.js"></script>
+  <script src="js/navegacionHoras.js"></script>
 
-    <script>
-      $(document).ready(function () {
-        $(".datepicker").datepicker({
-          format: "dd/mm/yyyy",
-        });
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(".datepicker").datepicker({
+        format: "dd/mm/yyyy",
       });
-      $(document).ready(function () {
-        $(".timepicker").timepicker({
-          default: "now",
-          twelveHour: false, // change to 12 hour AM/PM clock from 24 hour
-          doneText: "OK",
-          autoClose: false,
+    });
+    $(document).ready(function () {
+      $(".timepicker").timepicker({
+        default: "now",
+        twelveHour: false, // change to 12 hour AM/PM clock from 24 hour
+        doneText: "OK",
+        autoClose: false,
 
-          vibrate: true, // vibrate the device when dragging clock hand
-        });
+        vibrate: true, // vibrate the device when dragging clock hand
       });
-    </script>
-  </body>
+    });
+    
+  </script>
+</body>
+
 </html>

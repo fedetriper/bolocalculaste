@@ -3,7 +3,8 @@ const fechaInControl = document.getElementById("fechaInPubli");
 const fechaOutControl = document.getElementById("fechaOutPubli");
 const penaltyCheckbox = document.getElementById("penaltyPubli");
 const duracionPenaltyInput = document.getElementById("duracionPenaltyPubli");
-
+const swJ8 = document.getElementById("swJ8");
+const swJ12 = document.getElementById("swJ12");
 let jornadaNumero = 0;
 const jornadasArray = [];
 
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "block"
       : "none";
   });
+});
   //al presionar el boton GuardarDia
   btnGuardarDia.addEventListener("click", (e) => {
     e.preventDefault();
@@ -49,16 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (tipoJornada.checked === true) {
+    if (swJ12.checked === true) {
       AgregarJor12(fechaIn, fechaOut, penalty, duracionPenalty);
     } else {
       AgregarJor8(fechaIn, fechaOut, penalty, duracionPenalty);
     }
 
+    
+
     // Reset the form after adding jornada
     fechaInControl.value = "";
     fechaOutControl.value = "";
-    tipoJornada.checked = true;
+    swJ8.checked = false;
+    swJ12.checked = false;
     penaltyPubli.checked = false;
     duracionPenaltyInput.value = "00:00";
     duracionPenaltyInput.style.display = "none";
@@ -70,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     moduloHorasPubli.style.display = "none";
     btnSumarDia.style.display = "block";
   });
-});
+
 // duracionPenaltyInput.style.display = "none";
 // duracionPenaltyInput.value = "00:00";
 
@@ -308,7 +313,7 @@ function UpdateJornadasList() {
 }
 
 // Calculate the statistics and create the result object
-function CalcularCierre() {
+function calcularCierre() {
   let jornadas8hs = 0;
   let jornadas12hs = 0;
   let totalHorasExtras100 = 0;
@@ -361,7 +366,7 @@ function CalcularCierre() {
 
 // Add event listener for "Calcular Cierre" button
 botonCierrePubli.addEventListener("click", () => {
-  CalcularCierre();
+  calcularCierre();
 });
 
 //mostar cierre
