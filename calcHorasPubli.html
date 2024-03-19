@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Bolo Calculaste?</title>
+  <!-- Iconos -->
+  <link rel="icon" href="assets/bolo2favicon32px.png" type="image/png" sizes="32x32" />
+  <!-- PARA LOS MODELOS MAS RECIENTES DE IPAD Y IPHONE -->
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="152x152" />
+  <link rel="apple-touch-icon-precomposed" href="assets/icon_iphone.png" type="image/png" sizes="120x120" />
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/estilos_v2.css" />
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- moment.js manejar fechas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Last-Modified" content="0" />
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+</head>
+
+<body>
+  <header>
+    <!-- Navbar responsivo -->
+    <div class="navbar-fixed">
+      <nav class="nav-extended">
+        <div class="nav-wrapper red darken-3">
+          <a href="#" data-target="sidenavMobile" class="sidenav-trigger show-on-large"><i
+              class="material-icons">menu</i></a>
+          <a href="#" class="brand-logo" id="currentScreen">Calculo Horas</a>
+          <div>
+            <i class="material-icons right modal-trigger" href="#modalPubli" id="help" onclick="help()"
+              style="margin-right: 1em; display: none">help_outline</i>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- sidenav -->
+  <ul class="sidenav" id="sidenavMobile">
+    <li>
+      <img class="responsive-img sidenavImage" src="assets/icon_iphone.png" />
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickInicio()"><i class="material-icons">home</i>Inicio</a>
+    </li>
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickPubli()"><i class="material-icons">camera</i>Publicidad</a>
+    </li>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickLargo()"><i class="material-icons">movie</i>Largo</a>
+    </li>
+
+    <div class="divider"></div>
+    <li>
+      <a href="#" class="sidenav-close" onclick="clickAbout()"><i class="material-icons">announcement</i>Contacto</a>
+    </li>
+  </ul>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m12 l6 offset-l3">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Ingresa las horas</span>
+              <form>
+                  <div class="row">
+                    <div class="col s6">
+                      <p>
+                        <label>
+                          <input type="radio" name="tipoJornada" value="8" id="swJ8" checked="checked" />
+                          <span>8 horas</span>
+                        </label>
+                      </p>
+                    </div>
+                    <div class="col s6">
+                      <p>
+                        <label>
+                          <input type="radio" name="tipoJornada" value="12" id="swJ12" />
+                          <span>12 horas</span>
+                        </label>
+                      </p>
+                    </div>
+                  </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label class="active" for="fechaInPubli">Fecha de inicio</label>
+                    <input type="datetime-local" id="fechaInPubli">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label class="active" for="fechaOutPubli">Fecha de finalización</label>
+                    <input type="datetime-local" id="fechaOutPubli">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <p>
+                      <label>
+                        <input type="checkbox" name="penalty" id="penaltyPubli" />
+                        <span>Penalización</span>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <select class="browser-default" id="duracionPenaltyPubli">
+                      <option value="00:00">0 minutos</option>
+                      <option value="00:05">5 minutos</option>
+                      <option value="00:10">10 minutos</option>
+                      <option value="00:15">15 minutos</option>
+                      <option value="00:20">20 minutos</option>
+                      <option value="00:25">25 minutos</option>
+                      <option value="00:30">30 minutos</option>
+                      <option value="00:35">35 minutos</option>
+                      <option value="00:40">40 minutos</option>
+                      <option value="00:45">45 minutos</option>
+                      <option value="00:50">50 minutos</option>
+                      <option value="00:55">55 minutos</option>
+                      <option value="01:00">1 hora</option>
+                    </select>
+                    <label>Duración de la penalización</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s12">
+                    <button class="btn-large red" type="button" id="btnGuardarDiaPubli">Guardar día</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+  <script src="js/horasPubli_v2.js"></script>
+  <script src="js/navegacionHoras.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      // initialize datepickers and timepickers
+      $(".datepicker").datepicker({
+        format: "dd/mm/yyyy",
+      });
+      $(".timepicker").timepicker({
+        default: "now",
+        twelveHour: false, // change to 12 hour AM/PM clock from 24 hour
+        doneText: "OK",
+        autoClose: false,
+
+        vibrate: true, // vibrate the device when dragging clock hand
+      });
+    });
+    
+  </script>
+</body>
+
+</html>
